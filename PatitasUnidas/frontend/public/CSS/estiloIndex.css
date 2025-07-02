@@ -1,0 +1,115 @@
+/* --- Contenedor general --- */
+.contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* --- Estilos generales --- */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* --- Header con Grid --- */
+header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.logo {
+  height: 50px;
+  justify-self: start;
+}
+
+.nav-botones {
+  display: flex;
+  gap: 10px;
+  justify-self: end;
+}
+
+.nav-botones button {
+  padding: 8px 14px;
+  background-color: #ffffff;          /* Fondo blanco */
+  border: 2px solid #f3dbcf;          /* Borde suave */
+  border-radius: 8px;
+  color: #fc5745;                     /* Texto naranja */
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-botones button:hover {
+  background-color: #fc5745;          /* Fondo naranja al pasar mouse */
+  color: #ffffff;                     /* Texto blanco */
+  border-color: #fc5745;              /* Borde mismo tono que fondo */
+}
+
+
+/* --- Carrusel --- */
+.carrusel {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  background-color: white;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Botones de navegación */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;                /* Añadido: tamaño fijo */
+  height: 40px;               /* Añadido: tamaño fijo */
+  display: flex;              /* Añadido: para centrar */
+  align-items: center;        /* Añadido: centra vertical */
+  justify-content: center;    /* Añadido: centra horizontal */
+  background-color: rgba(247, 1, 1, 0.8);
+  color: white;               /* Añadido: color del símbolo */
+  border: none;
+  font-size: 1.5rem;          /* Ajustado: tamaño símbolo */
+  cursor: pointer;
+  border-radius: 50%;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.prev:hover, .next:hover {
+  background-color: rgba(200, 0, 0, 0.9); /* Más contraste al pasar el mouse */
+}
+
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
