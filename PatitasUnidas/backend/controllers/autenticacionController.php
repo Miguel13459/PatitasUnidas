@@ -5,14 +5,42 @@
         private string $contrasenia;
         private string $usuario;
 
-        public function __construct($Usuario, $Contrasenia) {
-            $this->usuario = $Usuario;
-            $this->contrasenia = $Contrasenia;
+        public function __construct(string $usuario, string $contrasenia) {
+            $this->usuario = $usuario;
+            $this->contrasenia = $contrasenia;
         }
 
-        public function validarCredenciales(){
+        public function validarCredenciales(): bool{
             session_start();
-            if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            if ($conn->connect_error) {
+                die("Conexión fallida: " . $conn->connect_error);
+            }
+
+            $stmt = $conn->prepare("SELECT personal.usuario, personal.contrasenia FROM personal WHERE usuario = ? AND contrasenia = ?");
+            $stmt->bind_param("s", $this->usuario);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+
+            if ($resultado->num_rows == 1) {
+                $fila = $resultado->fetch_assoc();
+
+                // Verifica el hash de la contraseña
+                if (
+                    //password_verify($this->contrasenia, $fila['contrasenia'])
+                    $this->contrasenia === $fila['contrasenia'] //sin hash temporal, ELIMINAR ESTA LINEA
+                ) {
+                    $_SESSION['usuario'] = $fila['usuario'];
+                    $_SESSION['idPersonal'] = $fila['idPersonal'];
+                    return true;
+                }
+            }
+
+            // Si llega aquí es porque falló
+            return false;
+
+            /*if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $usuario = $_POST['usuario'];
                 $contrasenia = $_POST['contrasenia'];
 
@@ -33,7 +61,7 @@
                 } else {
                     echo "Correo o contraseña incorrectos.";
                 }
-            }
+            }*/
         }
     }    
 ?>

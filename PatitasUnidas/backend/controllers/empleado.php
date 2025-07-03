@@ -13,8 +13,11 @@
     
         public function iniciarSesion(){
             $inicioDeSesion = new Autenticacion($usuario, $contrasenia);
-            if($inicioDeSesion){
+            if($inicioDeSesion === true){
                 header("Location: ../../frontend/src/pages/adopciones.php");
+            }
+            else {
+                echo "Correo o contraseña incorrectos.";
             }
         }
 
@@ -24,19 +27,35 @@
             header("Location: ../../frontend/src/public/index.html");
         }
 
-        public function crearMascota(){
+        public function crearMascota($Nombre, $Especie, $Edad, $Sexo, $Tamanio, $Descripcion, $Fotografia, $IdCentro){
             session_start();
             $visibilidadSitio = 1;
 
-            
+            $mascota = new Mascota($Nombre, $Especie, $Edad, $Sexo, $Tamanio, $Descripcion, $Fotografia, $IdCentro);
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $stmt = $conn->prepare("INSERT INTO mascota (nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia) VALUES (?, ?, ?, ?)");
-                $stmt->bind_param("siss", $_POST['nombre'], $_POST['edad'], $_POST['descripcion'], $_POST['imagen_url']);
-                $stmt->execute();
-                header("Location: adopciones.php");
-                exit;
-}
+                $stmt = $conn->prepare("INSERT INTO mascota (nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro) 
+                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param(
+                "sssssisbi",
+                $Nombre,
+                $Especie,
+                $Edad,
+                $Sexo,
+                $Tamanio,
+                $visibilidadSitio,
+                $Descripcion,
+                $Fotografia,
+                $IdCentro
+                );
+                
+                if ($stmt->execute()) {
+                    header("Location: adopciones.php");
+                    exit;
+                } else {
+                    echo "Error al insertar la mascota: " . $stmt->error;
+                }
+            }
         }
 
         public function editarMascota(){
