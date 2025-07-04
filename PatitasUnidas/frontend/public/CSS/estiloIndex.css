@@ -213,7 +213,7 @@ header {
 
 /* Tarjeta interior fondo */
 .tarjeta-paso {
-  border: 3px double #fc5745;
+  border: 3px dotted #fc5745;
   border-radius: 18px;
   padding: 20px;
   background-color: #ffffff;
@@ -264,4 +264,94 @@ header {
     max-width: 100%;
   }
 }
+
+
+.texto-listo-adoptar
+{
+  text-align: center;
+   font-family: 'Fredoka', sans-serif;
+  color: #fc5745;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+/* Banner de ayuda */
+.banner-ayuda {
+  background-color: #fef4f1;
+  border: 3px dashed #fc5745;
+  padding: 40px 20px 0px 20px; /* eliminamos padding inferior */
+  text-align: center;
+  max-width: 1000px;
+  margin: 40px auto;
+  
+}
+
+/* Texto dentro del banner */
+.mensaje-ayuda {
+  font-family: 'Fredoka', sans-serif;
+  color: #fc5745;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+/* Imagen del perrito tocando el borde */
+.img-parritoPata {
+  width: 200px;
+  height: auto;
+  margin-bottom: -0px; /* esto hace que toque el borde */
+}
+
+.footer {
+  background-color: #fef4f1;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Fredoka', sans-serif;
+}
+
+.footer-logo {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 4px; /* Pega el texto más */
+}
+
+.footer-subtitulo {
+  color: #fc5745;
+  font-weight: bold;
+  margin: 0;
+}
+
+.footer-direccion {
+  color: #000000;
+  font-family: 'Lato';
+  font-size: 1rem;
+  margin: 4px 0 10px 0;
+  line-height: 1.3;
+}
+
+.footer-redes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.footer-redes a {
+  color: #fc5745;
+  font-size: 1.4rem;
+  transition: transform 0.3s ease;
+}
+
+.footer-redes a:hover {
+  transform: scale(1.2);
+  color: #d43e34;
+}
+
+
+
+
+
+
+
 
