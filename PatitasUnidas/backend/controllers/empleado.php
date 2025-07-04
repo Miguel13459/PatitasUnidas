@@ -28,11 +28,23 @@
         }
 
         public function crearMascota(Mascota $mascota){
-            session_start();
-
-            $conn = new mysqli($servername, $username, $password, $dbname);
-
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $visibilidadSitio = 1
+                //Se crea la instancia de la mascota
+                $mascota = new Mascota(
+                    $_POST['nombre'],
+                    $_POST['especie'],
+                    $_POST['edad'],
+                    $_POST['sexo'],
+                    $_POST['tamanio'],
+                    $visibilidadSitio,
+                    $_POST['descripcion'],
+                    $_POST['fotografia'],
+                    $_POST['idCentro']
+                );
+
+                //insertar en la base de datos
+                $conn = new mysqli($servername, $username, $password, $dbname);
                 
                 $stmt = $conn->prepare("INSERT INTO mascota (nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro) 
                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -43,7 +55,7 @@
                 $mascota->getEdad(),
                 $mascota->getSexo(),
                 $mascota->getTamanio(),
-                $mascota->getVisibilidadSitio(),
+                $visibilidad,
                 $mascota->getDescripcion(),
                 $mascota->getFotografia(),
                 $mascota->getIdCentro()
@@ -55,6 +67,9 @@
                 } else {
                     echo "Error al insertar la mascota: " . $stmt->error;
                 }
+
+                $stmt->close();
+                $conn->close();
             }
         }
 
