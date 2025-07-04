@@ -27,26 +27,26 @@
             header("Location: ../../frontend/src/public/index.html");
         }
 
-        public function crearMascota($Nombre, $Especie, $Edad, $Sexo, $Tamanio, $Descripcion, $Fotografia, $IdCentro){
+        public function crearMascota(Mascota $mascota){
             session_start();
-            $visibilidadSitio = 1;
 
-            $mascota = new Mascota($Nombre, $Especie, $Edad, $Sexo, $Tamanio, $Descripcion, $Fotografia, $IdCentro);
+            $conn = new mysqli($servername, $username, $password, $dbname);
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                
                 $stmt = $conn->prepare("INSERT INTO mascota (nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro) 
                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->bind_param(
                 "sssssisbi",
-                $Nombre,
-                $Especie,
-                $Edad,
-                $Sexo,
-                $Tamanio,
-                $visibilidadSitio,
-                $Descripcion,
-                $Fotografia,
-                $IdCentro
+                $mascota->getNombre(),
+                $mascota->getEspecie(),
+                $mascota->getEdad(),
+                $mascota->getSexo(),
+                $mascota->getTamanio(),
+                $mascota->getVisibilidadSitio(),
+                $mascota->getDescripcion(),
+                $mascota->getFotografia(),
+                $mascota->getIdCentro()
                 );
                 
                 if ($stmt->execute()) {
@@ -59,7 +59,21 @@
         }
 
         public function editarMascota(){
-            
+            session_start();
+
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $stmt = $conn->prepare("UPDATE mascota SET nombre = ?, especie= ?, edad= ?, sexo= ?, tamanio= ?, visibilidadSitio= ?, descripcion= ?, fotografia= ?, idCentro= ? WHERE id=?");
+                $stmt->bind_param("sissi", $_POST['nombre'], $_POST['edad'], $_POST['descripcion'], $_POST['imagen_url'], $_POST['id']);
+                $stmt->execute();
+                header("Location: adopciones.php");
+                exit;
+            }
+
+            $id = $_GET['id'];
+            $animal = $conn->query("SELECT * FROM animales WHERE id=$id")->fetch_assoc();
+
         }
 
         public function eliminarMascota(){
