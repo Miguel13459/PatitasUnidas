@@ -1,9 +1,9 @@
 <?php
-    require_once '../config/config.php';
+    /*require_once '../config/config.php';
     require_once 'autenticacionController.php';
     require_once '../models/centroAdoptivo.php';
     require_once '../models/eventos.php';
-    require_once '../models/mascota.php';
+    require_once '../models/mascota.php';*/
 
     class Empleado{
         public int $idEmpleado;
@@ -11,10 +11,10 @@
         private string $contrasenia;
         private int $tipoSucursal;
     
-        public function iniciarSesion(){
+        public function iniciarSesion($usuario, $contrasenia){
             $inicioDeSesion = new Autenticacion($usuario, $contrasenia);
             if($inicioDeSesion === true){
-                header("Location: ../../frontend/src/pages/adopciones.php");
+                header("Location: ../frontend/src/pages/adopciones.php");
             }
             else {
                 echo "Correo o contraseña incorrectos.";
@@ -24,24 +24,32 @@
         public function cerrarSesion(){
             session_start();
             session_destroy();
-            header("Location: ../../frontend/src/public/index.html");
+            header("Location: ../frontend/src/public/index.html");
         }
 
         public function crearMascota(Mascota $mascota){
-            if ($_SERVER["REQUEST_METHOD"] == "POST" || isset($_REQUEST['guardar'])) {
-                //visibilidad de mascota en el sitio
+            session_start();
+
+            require_once "backend/models/mascota.php";
+            require_once "..config/config.php";
+
+            if (isset($_REQUEST['guardar'])) {
                 $visibilidadSitio = 1;
 
-                //variables para la fotografia
-                $tipoArchivo = $_FILES['fotografia']['type']; //se usará para validar tipo de imagen
-                $tamanioArchivo = $_FILES['fotografia']['size'];
-                $imagenSubida = fopen($_FILES['fotografia']['tpm_name'], 'r');
-                $binariosImagen = fread($imagenSubida, $tamanioArchivo);
+                // Validar archivo subido
+                if (isset($_FILES['fotografia']) && $_FILES['fotografia']['error'] === UPLOAD_ERR_OK) {
+                    $tamanioArchivo = $_FILES['fotografia']['size'];
+                    $imagenSubida = fopen($_FILES['fotografia']['tmp_name'], 'r');
+                    $binariosImagen = fread($imagenSubida, $tamanioArchivo);
+                    fclose($imagenSubida);
+                } else {
+                    die("Error al subir la imagen.");
+                }
 
-                //Se crea la instancia de la mascota
-                
+                // SE TIENE QUE BORRAR ESTA PARTE, SE USÓ PARA PROBAR SI SE PUEDE INSERTAR EL OBJETO
+                //DE LA MASCOTA
                 $mascota = new Mascota(
-                    "",
+                    null,
                     $_POST['nombre'],
                     $_POST['especie'],
                     $_POST['edad'],
@@ -50,27 +58,60 @@
                     $visibilidadSitio,
                     $_POST['descripcion'],
                     $binariosImagen,
-                    //$_POST['fotografia'],
-                    $_POST['idCentro']
+                    (int)$_POST['idCentro']
                 );
 
-                //insertar en la base de datos
+                $nombre = $mascota->getNombre();
+                $especie = $mascota->getEspecie();
+                $edad = $mascota->getEdad();
+                $sexo = $mascota->getSexo();
+                $tamanio = $mascota->getTamanio();
+                $descripcion = $mascota->getDescripcion();
+                $fotografia = $mascota->getFotografia();
+                $idCentro = $mascota->getIdCentro();
+
+                // Conexión
                 $conn = new mysqli($servername, $username, $password, $dbname);
-                $binariosImagen = mysqli_escape_string($conn, $binariosImagen);
-                $query = "INSERT INTO mascota(nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro)
-                VALUES ('".$mascota->getNombre."','".$mascota->getEspecie."','".$mascota->getEdad."','".$mascota->getSexo."','".$mascota->getTamanio."',
-                '".$mascota->getVisibilidadSitio."','".$mascota->getDescripcion."','".$mascota->getFotografia."','".$mascota->getIdSucursal."')";
-                $res=mysqli_query($conn, $query);
+                if ($conn->connect_error) {
+                    die("Conexión fallida: " . $conn->connect_error);
+                }
+
+                // Query segura
+                $stmt = $conn->prepare("INSERT INTO mascota (nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro)
+                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                $stmt->bind_param(
+                    "sssssisbi",
+                    $nombre,
+                    $especie,
+                    $edad,
+                    $sexo,
+                    $tamanio,
+                    $visibilidadSitio,
+                    $descripcion,
+                    $fotografia,
+                    $idCentro
+                );
+
+                // Ejecutar
+                if ($stmt->execute()) {
+                    header("Location: test.php"); //frontend/public/index.html
+                    exit;
+                } else {
+                    echo "Error al insertar: " . $stmt->error;
+                }
+
+                $stmt->close();
                 $conn->close();
-            }
-            else{
-                echo "Error al ingresar los datos";
+            } else {
+                echo "Datos no insertados";
             }
         }
 
         public function editarMascota(){
             session_start();
 
+            require_once "..config/config.php";
             $conn = new mysqli($servername, $username, $password, $dbname);
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {

@@ -1,5 +1,4 @@
 <?php
-    require_once '../config/config.php';
     class Autenticacion{
         public bool $sesionIniciada;
         private string $contrasenia;
@@ -12,6 +11,7 @@
 
         public function validarCredenciales(): bool{
             session_start();
+            require_once '../config/config.php';
             $conn = new mysqli($servername, $username, $password, $dbname);
 
             if ($conn->connect_error) {
