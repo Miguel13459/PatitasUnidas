@@ -28,10 +28,20 @@
         }
 
         public function crearMascota(Mascota $mascota){
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $visibilidadSitio = 1
+            if ($_SERVER["REQUEST_METHOD"] == "POST" || isset($_REQUEST['guardar'])) {
+                //visibilidad de mascota en el sitio
+                $visibilidadSitio = 1;
+
+                //variables para la fotografia
+                $tipoArchivo = $_FILES['fotografia']['type']; //se usará para validar tipo de imagen
+                $tamanioArchivo = $_FILES['fotografia']['size'];
+                $imagenSubida = fopen($_FILES['fotografia']['tpm_name'], 'r');
+                $binariosImagen = fread($imagenSubida, $tamanioArchivo);
+
                 //Se crea la instancia de la mascota
+                
                 $mascota = new Mascota(
+                    "",
                     $_POST['nombre'],
                     $_POST['especie'],
                     $_POST['edad'],
@@ -39,37 +49,22 @@
                     $_POST['tamanio'],
                     $visibilidadSitio,
                     $_POST['descripcion'],
-                    $_POST['fotografia'],
+                    $binariosImagen,
+                    //$_POST['fotografia'],
                     $_POST['idCentro']
                 );
 
                 //insertar en la base de datos
                 $conn = new mysqli($servername, $username, $password, $dbname);
-                
-                $stmt = $conn->prepare("INSERT INTO mascota (nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro) 
-                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param(
-                "sssssisbi",
-                $mascota->getNombre(),
-                $mascota->getEspecie(),
-                $mascota->getEdad(),
-                $mascota->getSexo(),
-                $mascota->getTamanio(),
-                $visibilidad,
-                $mascota->getDescripcion(),
-                $mascota->getFotografia(),
-                $mascota->getIdCentro()
-                );
-                
-                if ($stmt->execute()) {
-                    header("Location: adopciones.php");
-                    exit;
-                } else {
-                    echo "Error al insertar la mascota: " . $stmt->error;
-                }
-
-                $stmt->close();
+                $binariosImagen = mysqli_escape_string($conn, $binariosImagen);
+                $query = "INSERT INTO mascota(nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro)
+                VALUES ('".$mascota->getNombre."','".$mascota->getEspecie."','".$mascota->getEdad."','".$mascota->getSexo."','".$mascota->getTamanio."',
+                '".$mascota->getVisibilidadSitio."','".$mascota->getDescripcion."','".$mascota->getFotografia."','".$mascota->getIdSucursal."')";
+                $res=mysqli_query($conn, $query);
                 $conn->close();
+            }
+            else{
+                echo "Error al ingresar los datos";
             }
         }
 
