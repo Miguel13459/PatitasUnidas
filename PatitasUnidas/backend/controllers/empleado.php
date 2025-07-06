@@ -32,13 +32,16 @@
 
         //INICIO DE SESION
         public function iniciarSesion($usuario, $contrasenia){
-            session_start();
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
             require_once 'autenticacionController.php';
             $sesionEmpleado = new Autenticacion($usuario, $contrasenia);
             $confirmarSesion = $sesionEmpleado->validarCredenciales();
 
             if($confirmarSesion === true){
-                header("Location: ../frontend/src/pages/adopciones.php");
+                header("Location: /PatitasUnidas/frontend/src/pages/pruebaAdopcionAdmin.html");
             }
             else {
                 echo "Correo o contraseña incorrectos.";

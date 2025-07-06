@@ -10,8 +10,11 @@
         }
 
         public function validarCredenciales(): bool{
-            session_start();
-            require_once '../config/config.php';
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+//C:\Users\migue\OneDrive\Documentos\PatitasUnidas\PatitasUnidas\backend\config\config.php
+            require_once __DIR__ . '/../config/config.php';
             $conn = new mysqli($servername, $username, $password, $dbname);
             if ($conn->connect_error) {
                 die("Conexión fallida: " . $conn->connect_error); //CAMBIAR RESPUESTA DE CONECCION FALLIDA, SALDRÁ UN MENSAJE O LO REDIRIGE?
@@ -39,28 +42,6 @@
             // Si llega aquí es porque falló
             return false;
 
-            /*if($_SERVER["REQUEST_METHOD"] == "POST"){
-                $usuario = $_POST['usuario'];
-                $contrasenia = $_POST['contrasenia'];
-
-                if ($conn->connect_error) {
-                die("Conexión fallida: " . $conn->connect_error);
-                }
-
-                $stmt = $conn->prepare("SELECT personal.usuario, personal.contrasenia FROM personal WHERE usuario = ? AND contrasenia = ?");
-                $stmt->bind_param("ss", $usuario, $contrasenia);
-                $stmt->execute();
-                $resultado = $stmt->get_result();
-
-                if ($resultado->num_rows == 1) {
-                    $usuario = $resultado->fetch_assoc();
-                    $_SESSION['rol'] = $usuario['rol'];
-                    $_SESSION['usuario'] = $usuario['usuario'];
-                    exit;
-                } else {
-                    echo "Correo o contraseña incorrectos.";
-                }
-            }*/
         }
     }    
 ?>
