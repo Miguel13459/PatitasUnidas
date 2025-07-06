@@ -13,13 +13,12 @@
             session_start();
             require_once '../config/config.php';
             $conn = new mysqli($servername, $username, $password, $dbname);
-
             if ($conn->connect_error) {
-                die("Conexión fallida: " . $conn->connect_error);
+                die("Conexión fallida: " . $conn->connect_error); //CAMBIAR RESPUESTA DE CONECCION FALLIDA, SALDRÁ UN MENSAJE O LO REDIRIGE?
             }
 
             $stmt = $conn->prepare("SELECT personal.usuario, personal.contrasenia FROM personal WHERE usuario = ? AND contrasenia = ?");
-            $stmt->bind_param("s", $this->usuario);
+            $stmt->bind_param("ss", $this->usuario, $this->contrasenia);
             $stmt->execute();
             $resultado = $stmt->get_result();
 

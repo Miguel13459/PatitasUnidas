@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #formularioMascota{
+            width: 60%;
+            height: 60%;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="formularioMascota">
+        <form action="../../../backend/controllers/" method="POST" enctype="multipart/form-data">
+        <label for="nombre">Nombre</label><br>
+        <input type="text" name="nombre" required><br>
+        <label for="especie">Especie</label><br>
+        <input type="text" name="especie" required><br>
+        <label for="edad">Edad</label><br>
+        <input type="text" name="edad" required><br>
+        <label for="sexo">Sexo</label><br>
+        <input type="text" name="sexo" required><br>
+        <label for="tamanio">tamaño</label><br>
+        <input type="text" name="tamanio" required><br>
+        <label for="descripcion">Descripción</label><br>
+        <input type="text" name="descripcion"><br>
+        <label for="fotografia">Fotografía</label><br>
+        <div class="form-group">
+            <input type="file" class="form-control-file" name="fotografia">
+        </div>
+        <label for="idCentro">Centro adoptivo</label><br>
+        <input type="number" name="idCentro" required><br>
+        <button type="submit" name="guardar">Registrar</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -6,14 +6,38 @@
     require_once '../models/mascota.php';*/
 
     class Empleado{
-        public int $idEmpleado;
-        private string $usuario;
-        private string $contrasenia;
-        private int $tipoSucursal;
+        public ?int $_idEmpleado;
+        private string $_usuario;
+        private string $_contrasenia;
+        private int $_centro;
+
+        public function __construct(?int $idEmpleado, string $usuario, string $contrasenia, $centro) {
+            $this->_idEmpleado = $idEmpleado;
+            $this->_usuario = $usuario;
+            $this->_contrasenia = $contrasenia;
+            $this->_centro = $centro;
+        }
+
+        //getters y setters, esto debido a que los miembros de la clase son privadas
+        public function getIdEmpleado(){return $this->_idEmpleado;}
+        public function getUsuario(){return $this->_usuario;}
+        public function getContrasenia(){return $this->_contrasenia;}
+        public function getCentro(){return $this->_centro;}
+
+        public function setIdEmpleado($idEmpleado){$this->_idEmpleado = $idEmpleado;}
+        public function setUsuario($usuario){$this->_usuario = $usuario;}
+        public function setContrasenia($contrasenia){$this->_contrasenia = $contrasenia;}
+        public function setCentro($centro){$this->_centro = $centro;}
     
+
+        //INICIO DE SESION
         public function iniciarSesion($usuario, $contrasenia){
-            $inicioDeSesion = new Autenticacion($usuario, $contrasenia);
-            if($inicioDeSesion === true){
+            session_start();
+            require_once 'autenticacionController.php';
+            $sesionEmpleado = new Autenticacion($usuario, $contrasenia);
+            $confirmarSesion = $sesionEmpleado->validarCredenciales();
+
+            if($confirmarSesion === true){
                 header("Location: ../frontend/src/pages/adopciones.php");
             }
             else {
@@ -21,18 +45,16 @@
             }
         }
 
+        //CERRAR SESION
         public function cerrarSesion(){
             session_start();
             session_destroy();
             header("Location: ../frontend/src/public/index.html");
         }
 
+        //CREAR MASCOTA
         public function crearMascota(Mascota $mascota){
             session_start();
-
-            require_once "backend/models/mascota.php";
-            require_once "..config/config.php";
-
             if (isset($_REQUEST['guardar'])) {
                 $visibilidadSitio = 1;
 
@@ -46,21 +68,6 @@
                     die("Error al subir la imagen.");
                 }
 
-                // SE TIENE QUE BORRAR ESTA PARTE, SE USÓ PARA PROBAR SI SE PUEDE INSERTAR EL OBJETO
-                //DE LA MASCOTA
-                $mascota = new Mascota(
-                    null,
-                    $_POST['nombre'],
-                    $_POST['especie'],
-                    $_POST['edad'],
-                    $_POST['sexo'],
-                    $_POST['tamanio'],
-                    $visibilidadSitio,
-                    $_POST['descripcion'],
-                    $binariosImagen,
-                    (int)$_POST['idCentro']
-                );
-
                 $nombre = $mascota->getNombre();
                 $especie = $mascota->getEspecie();
                 $edad = $mascota->getEdad();
@@ -71,6 +78,7 @@
                 $idCentro = $mascota->getIdCentro();
 
                 // Conexión
+                require_once "..config/config.php";
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 if ($conn->connect_error) {
                     die("Conexión fallida: " . $conn->connect_error);
