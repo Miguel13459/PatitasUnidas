@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #formularioMascota{
+            width: 60%;
+            height: 60%;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="formularioMascota">
+        <form action="../../../backend/controllers/acciones/iniciarSesion.php" method="POST">
+        <label for="usuario">Usuario de empleado</label><br>
+        <input type="text" name="usuario" required><br>
+        <label for="contrasenia">Contraseña</label><br>
+        <input type="password" name="contrasenia" required><br>
+        <button type="submit" name="iniciarSesion">Iniciar Sesión</button>
+        </form>
+    </div>
+</body>
+</html>
