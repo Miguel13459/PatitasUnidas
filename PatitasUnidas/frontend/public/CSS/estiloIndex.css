@@ -29,6 +29,12 @@ header {
   justify-self: start;
 }
 
+header a img {
+  display: block;
+  cursor: pointer;
+}
+
+
 .nav-botones {
   display: flex;
   gap: 10px;
@@ -51,6 +57,25 @@ header {
   color: #ffffff;
   border-color: #fc5745;
 }
+
+.invisible-clicable {
+  background-color: transparent !important;
+  color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  pointer-events: auto;
+  padding: 0 !important;
+  width: 100px; /* ajusta si quieres que tenga un tamaño específico */
+  height: 30px;
+  opacity: 0; /* oculta visualmente */
+}
+
+
+
+
+
+
 
 /* --- Carrusel --- */
 .carrusel {
@@ -77,40 +102,6 @@ header {
   object-fit: cover;
   flex-shrink: 0;
 }
-
-/* --- Botones del carrusel --- */
-.prev, .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(247, 1, 1, 0.8);
-  color: white;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  border-radius: 50%;
-  user-select: none;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.prev:hover, .next:hover {
-  background-color: rgba(200, 0, 0, 0.9);
-}
-
-.prev {
-  left: 10px;
-}
-
-.next {
-  right: 10px;
-}
-
 /* --- Botón de adopción --- */
 .nav-boton-adopcion {
   display: flex;

@@ -20,22 +20,37 @@
   <div class="contenedor">
     <!-- Header -->
     <header>
-      <img src="/PatitasUnidas/frontend/src/assets/Logo.png" alt="Patitas Unidas" class="logo" />
-      <nav class="nav-botones">
-        <button class="admin-btn">Administrador</button>
-      </nav>
+  <a href="/PatitasUnidas/frontend/public/index.html">
+    <img src="/PatitasUnidas/frontend/src/assets/Logo.png" alt="Patitas Unidas" class="logo" />
+  </a>
+  <a href="/PatitasUnidas/frontend/public/InicioSesion.html">
+    <button class="admin-btn invisible-clicable">Administrador</button>
+  </a>
     </header>
 
-    <!-- Carrusel -->
-    <section class="carrusel">
-      <div class="carousel-inner">
-        <img src="/PatitasUnidas/frontend/src/assets/carrusel1_Mesa de trabajo 1.png" alt="Imagen 1" />
-        <img src="/PatitasUnidas/frontend/src/assets/carrusel1_Mesa de trabajo 1.png" alt="Imagen 2" />
-        <img src="/PatitasUnidas/frontend/src/assets/carrusel1_Mesa de trabajo 1.png" alt="Imagen 3" />
-      </div>
-      <button class="prev" aria-label="Anterior">&#8249;</button>
-      <button class="next" aria-label="Siguiente">&#8250;</button>
-    </section>
+    <!-- Carrusel Bootstrap -->
+<div id="carouselPatitas" class="carousel slide carrusel" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/PatitasUnidas/frontend/src/assets/Carrusel-01.png" class="d-block w-100" alt="Imagen 1">
+    </div>
+    <div class="carousel-item">
+      <img src="/PatitasUnidas/frontend/src/assets/carrusel2-03.png" class="d-block w-100" alt="Imagen 2">
+    </div>
+    <div class="carousel-item">
+      <img src="/PatitasUnidas/frontend/src/assets/carrusel3-02.png" class="d-block w-100" alt="Imagen 3">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselPatitas" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselPatitas" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Siguiente</span>
+  </button>
+</div>
+
 
     <!-- Botón de adopción -->
     <nav class="nav-boton-adopcion">

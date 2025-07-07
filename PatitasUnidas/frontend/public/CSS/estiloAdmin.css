@@ -1,0 +1,194 @@
+Contenedor general --- */
+.contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* --- Estilos generales --- */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* --- Header con Grid --- */
+header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.logo {
+  height: 50px;
+  justify-self: start;
+}
+
+header a img {
+  display: block;
+  cursor: pointer;
+}
+
+
+/* --- Estilo boton del administrador --- */
+.admin-visible-btn {
+  padding: 8px 14px;
+  background-color: #ffffff;
+  border: 2px solid #f3dbcf; /* borde rosa claro */
+  border-radius: 8px;
+  color: #fc5745; /* texto coral */
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-visible-btn:hover {
+  background-color: #fc5745; /* fondo coral */
+  color: #ffffff; /* texto blanco */
+  border-color: #fc5745; /* borde coral */
+}
+
+.login-container {
+  max-width: 900px;
+  margin: 60px auto;
+  display: flex;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fceae2;
+  font-family: 'Fredoka', sans-serif;
+}
+
+.login-left {
+  flex: 1;
+}
+
+.login-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.login-right {
+  flex: 1;
+  padding: 40px 30px;
+  position: relative;
+  background-color: #fceae2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-logo {
+  width: 180px;
+  margin-bottom: 30px;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-form input {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  background-color: white;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.login-form button {
+  padding: 12px;
+  background-color: #fc5745;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #e04635;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  color: #fc5745;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  color: #c73728;
+}
+
+/* --- Modal personalizado de alerta --- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+  font-family: 'Fredoka', sans-serif;
+}
+
+.modal-content {
+  background-color: #fceae2; /* rosado claro */
+  padding: 25px 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 80%;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content p {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.modal-content button {
+  padding: 10px 24px;
+  background-color: #fc5745;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+  background-color: #e04635;
+}
+
+/* Animación opcional para suavidad */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
