@@ -1,6 +1,5 @@
 <?php
-    //requerimos crear una nueva sesión
-    if (isset($_REQUEST['iniciarSesion'])){
+    function inicioDeSesion(){
         require_once "../empleado.php";
         $idSucursal = rand(1,2);
 
@@ -10,7 +9,6 @@
             $_POST['contrasenia'],
             $idSucursal
         );
-
         $usuario = $inicioDeSesion->getUsuario();
         $contrasenia = $inicioDeSesion->getContrasenia();
 

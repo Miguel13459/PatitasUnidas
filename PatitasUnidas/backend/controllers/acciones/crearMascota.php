@@ -1,5 +1,5 @@
 <?php
-    if (isset($_REQUEST['iniciarSesion'])){
+    function crearMascotaDesdeFormulario(){
         require_once "backend/models/mascota.php";
         $mascota = new Mascota(
             null,
@@ -13,9 +13,6 @@
             $binariosImagen,
             (int)$_POST['idCentro']
         );
-
-        require_once "iniciarSesion.php";
-
 
         //$ingresarMascota = new Empleado();
         
