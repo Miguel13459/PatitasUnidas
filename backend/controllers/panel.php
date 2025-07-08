@@ -37,7 +37,8 @@
             die("Acceso denegado. Por favor inicia sesión.");
             exit;
         }
-        crearMascotaDesdeFormulario();
+        $mascota = [];
+        crearMascotaDesdeFormulario($mascota);
     }
 
     // ELIMINAR MASCOTA
