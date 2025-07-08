@@ -11,7 +11,7 @@
         private string $_contrasenia;
         private int $_centro;
 
-        public function __construct(?int $idEmpleado, string $usuario, string $contrasenia, $centro) {
+        public function __construct(?int $idEmpleado, string $usuario, string $contrasenia, int $centro) {
             $this->_idEmpleado = $idEmpleado;
             $this->_usuario = $usuario;
             $this->_contrasenia = $contrasenia;
@@ -19,7 +19,10 @@
         }
 
         //getters y setters, esto debido a que los miembros de la clase son privadas
-        public function getIdEmpleado(){return $this->_idEmpleado;}
+        public function getIdEmpleado(){
+            if($this->_idEmpleado === null){return null;}
+            else{return $this->_idEmpleado;}
+        }
         public function getUsuario(){return $this->_usuario;}
         public function getContrasenia(){return $this->_contrasenia;}
         public function getCentro(){return $this->_centro;}
@@ -31,17 +34,23 @@
     
 
         //INICIO DE SESION
-        public function iniciarSesion($usuario, $contrasenia){
+        public function iniciarSesion(array $empleado){
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
 
             require_once 'autenticacionController.php';
-            $sesionEmpleado = new Autenticacion($usuario, $contrasenia);
+            $sesionEmpleado = new Autenticacion($empleado[1], $empleado[2]);
             $confirmarSesion = $sesionEmpleado->validarCredenciales();
 
             if($confirmarSesion === true){
-                header("Location: /PatitasUnidas/frontend/src/pages/pruebaAdopcionAdmin.html");
+                require_once "../config/config.php";
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                $stmt = $conn->prepare("SELECT idEmpleado FROM personal WHERE usuario = ?");
+                $stmt->bind_param("s", $empleado[1]);
+                $stmt->execute();
+                $empleado[0] = $stmt->get_result();
+                return $empleado;
             }
             else {
                 echo "Correo o contraseña incorrectos.";

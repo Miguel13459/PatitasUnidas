@@ -14,7 +14,7 @@
             (int)$_POST['idCentro']
         );
 
-        //$ingresarMascota = new Empleado();
+        $ingresarMascota = new Empleado();
         
     }
 ?>

@@ -9,9 +9,14 @@
             $_POST['contrasenia'],
             $idSucursal
         );
-        $usuario = $inicioDeSesion->getUsuario();
-        $contrasenia = $inicioDeSesion->getContrasenia();
 
-        $inicioDeSesion->iniciarSesion($usuario, $contrasenia);
+        $empleado = [$inicioDeSesion->getIdEmpleado(), $inicioDeSesion->getUsuario(), $inicioDeSesion->getContrasenia(), $idSucursal];
+        /*$idEmpleado = $inicioDeSesion->getIdEmpleado();
+        $usuario = $inicioDeSesion->getUsuario();
+        $contrasenia = $inicioDeSesion->getContrasenia();*/
+
+        $empleado = $inicioDeSesion->iniciarSesion($empleado);
+
+        return $empleado;
     }
 ?>
