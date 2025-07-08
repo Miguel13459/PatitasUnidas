@@ -36,10 +36,10 @@
     <div class="login-right">
       <a href="/PatitasUnidas/frontend/public/index.html" class="close-btn">&times;</a>
       <img src="/PatitasUnidas/frontend/src/assets/LogoPatiasUnidas.png" alt="Logo Patitas Unidas" class="login-logo">
-      <form class="login-form">
+      <form class="login-form" action="../../backend/controllers/panel.php" method="POST">
         <input type="text" name="usuario" placeholder="Usuario" required>
         <input type="password" name="contrasenia" placeholder="Contraseña" required>
-        <button type="submit">Iniciar</button>
+        <button type="submit" name="iniciarSesion">Iniciar</button>
       </form>
     </div>
   </div>
@@ -52,8 +52,8 @@
   </div>
 </div>
 
-
-  <script src="/PatitasUnidas/frontend/public/JS/javaAdmin.js"></script>
+  <!--SE COMENTO PARA PRUEBAS DE SERVIDOR, SE DEBE DE DESCOMENTAR ESTE SCRIPT-->
+  <!--<script src="/PatitasUnidas/frontend/public/JS/javaAdmin.js"></script>-->
 
 </body>
 </html>     

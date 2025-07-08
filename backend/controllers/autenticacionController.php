@@ -33,7 +33,6 @@
                     $this->usuario === $fila['usuario'] & $this->contrasenia === $fila['contrasenia'] //sin hash temporal, ELIMINAR ESTA LINEA
                 ) {
                     $_SESSION['usuario'] = $fila['usuario'];
-                    $_SESSION['idPersonal'] = $fila['idPersonal'];
                     $this->sesionIniciada = true;
                     return $this->sesionIniciada;
                 }

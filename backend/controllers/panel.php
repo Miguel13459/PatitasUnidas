@@ -1,6 +1,7 @@
 <?php
     session_start();
     $empleado = [];
+    $idSucursal;
 
     // Archivos necesarios
     /*require_once '../models/mascota.php';
@@ -10,13 +11,24 @@
 
     // INICIO DE SESIÓN
     if (isset($_REQUEST['iniciarSesion'])) {
+        $idSucursal = rand(1,2);
         require_once "acciones/iniciarSesion.php";
         require_once 'empleado.php';
-        $empleado = inicioDeSesion();
+        $inicioDeSesion = new Empleado(
+            null,
+            $_POST['usuario'],
+            $_POST['contrasenia'],
+            $idSucursal
+        );
+        $empleado = inicioDeSesion($inicioDeSesion, $idSucursal);
         if (isset($_SESSION['usuario'])) {
             header("Location: /PatitasUnidas/frontend/src/pages/pruebaAdopcionAdmin.html");
         }
         
+    }
+
+    if(isset($_REQUEST['cerrarSesion'])){
+        cerrarSesion($empleado);
     }
 
     // CREAR MASCOTA
