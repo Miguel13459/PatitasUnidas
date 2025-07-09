@@ -22,26 +22,26 @@
 </head>
 <body>
     <div id="formularioMascota">
-        <form action="../../../backend/controllers/" method="POST" enctype="multipart/form-data">
+        <form action="../../../backend/controllers/panel.php" method="POST" enctype="multipart/form-data">
         <label for="nombre">Nombre</label><br>
-        <input type="text" name="nombre" required><br>
+        <input type="text" name="nombre" id="nombre" required><br>
         <label for="especie">Especie</label><br>
-        <input type="text" name="especie" required><br>
+        <input type="text" name="especie" id="especie" required><br>
         <label for="edad">Edad</label><br>
-        <input type="text" name="edad" required><br>
+        <input type="text" name="edad" id="edad" required><br>
         <label for="sexo">Sexo</label><br>
-        <input type="text" name="sexo" required><br>
+        <input type="text" name="sexo" id="sexo" required><br>
         <label for="tamanio">tamaño</label><br>
-        <input type="text" name="tamanio" required><br>
+        <input type="text" name="tamanio" id="tamanio" required><br>
         <label for="descripcion">Descripción</label><br>
-        <input type="text" name="descripcion"><br>
+        <input type="text" name="descripcion" id="descripcion"><br>
         <label for="fotografia">Fotografía</label><br>
         <div class="form-group">
-            <input type="file" class="form-control-file" name="fotografia">
+            <input type="file" class="form-control-file" name="fotografia" id="fotografia">
         </div>
         <label for="idCentro">Centro adoptivo</label><br>
-        <input type="number" name="idCentro" required><br>
-        <button type="submit" name="guardar">Registrar</button>
+        <input type="number" name="idCentro" id="centro" required><br>
+        <button type="submit" name="guardarMascota" id="guardar">Registrar mascota</button>
         </form>
     </div>
 </body>

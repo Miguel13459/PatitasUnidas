@@ -1,7 +1,7 @@
 <?php
-    if (isset($_REQUEST['iniciarSesion'])){
-        require_once "backend/models/mascota.php";
-        $mascota = new Mascota(
+    function crearMascotaDesdeFormulario(array $mascota){
+        require_once "../../models/mascota.php";
+        $_mascota = new Mascota(
             null,
             $_POST['nombre'],
             $_POST['especie'],
@@ -13,11 +13,7 @@
             $binariosImagen,
             (int)$_POST['idCentro']
         );
-
-        require_once "iniciarSesion.php";
-
-
-        //$ingresarMascota = new Empleado();
         
+        $mascota[0] = $_mascota->getId();
     }
 ?>
