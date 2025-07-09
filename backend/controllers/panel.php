@@ -1,7 +1,13 @@
 <?php
     session_start();
-    $empleado = [];
-    $idSucursal;
+    $empleado = array(
+        'idEmpleado' => null,
+	    'usuario' => '',
+	    'contrasenia' => '',
+        'idCentro' => null,
+        'estadoInicioSesion' => false
+        );
+    $idCentro;
 
     // Archivos necesarios
     /*require_once '../models/mascota.php';
@@ -11,20 +17,22 @@
 
     // INICIO DE SESIÓN
     if (isset($_REQUEST['iniciarSesion'])) {
-        $idSucursal = rand(1,2);
+        $idCentro = rand(1,2);
         require_once "acciones/iniciarSesion.php";
         require_once 'empleado.php';
-        $inicioDeSesion = new Empleado(
-            null,
-            $_POST['usuario'],
-            $_POST['contrasenia'],
-            $idSucursal
-        );
-        $empleado = inicioDeSesion($inicioDeSesion, $idSucursal);
-        if (isset($_SESSION['usuario'])) {
-            header("Location: /PatitasUnidas/frontend/src/pages/pruebaAdopcionAdmin.html");
-        }
+
+        $empleado['idCentro'] = $idCentro;
         
+        $empleado = inicioDeSesion($empleado);
+        if ($empleado['estadoInicioSesion']) {
+            sleep(1);
+            header("Location: /PatitasUnidas/frontend/public/adopciones.html");
+        }
+        else{
+            echo "<script>alert('Usuario o contraseña incorrectos');</script>";
+            sleep(1);
+            header("Location: /PatitasUnidas/frontend/public/inicioSesion.html");
+        }
     }
 
     if(isset($_REQUEST['cerrarSesion'])){
