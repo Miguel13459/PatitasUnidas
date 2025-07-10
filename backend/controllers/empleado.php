@@ -68,12 +68,10 @@ class Empleado
         }
 
         require_once 'autenticacionController.php';
-        $sesionEmpleado = new Autenticacion($empleado['usuario'], $empleado['contrasenia']);
+        $sesionEmpleado = new Autenticacion($empleado[1], $empleado[2]);
         $confirmarSesion = $sesionEmpleado->validarCredenciales();
 
         if ($confirmarSesion === true) {
-            $empleado['estadoInicioSesion'] = $confirmarSesion;
-
             //require_once "../config/config.php";
             $servername = "localhost";
             $username = "cuidadorAdmin";
@@ -81,13 +79,12 @@ class Empleado
             $dbname = "PatitasUnidas";
             $conn = new mysqli($servername, $username, $password, $dbname);
             $stmt = $conn->prepare("SELECT idPersonal FROM personal WHERE usuario = ?");
-            $stmt->bind_param("s", $empleado['usuario']);
+            $stmt->bind_param("s", $empleado[1]);
             $stmt->execute();
-            $empleado['idEmpleado'] = (int) $stmt->get_result();
+            $empleado[0] = $stmt->get_result();
             return $empleado;
         } else {
-            $empleado['estadoInicioSesion'] = false;
-            return $empleado;
+            echo "Correo o contraseña incorrectos.";
         }
     }
 
@@ -106,6 +103,7 @@ class Empleado
 
         $visibilidadSitio = 1;
 
+        // Validar archivo subido
         if (isset($_FILES['fotografia']) && $_FILES['fotografia']['error'] === UPLOAD_ERR_OK) {
             $tamanioArchivo = $_FILES['fotografia']['size'];
             $imagenSubida = fopen($_FILES['fotografia']['tmp_name'], 'r');
@@ -124,12 +122,14 @@ class Empleado
         $fotografia = $mascota->getFotografia();
         $idCentro = $mascota->getIdCentro();
 
+        // Conexión
         require_once "..config/config.php";
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Conexión fallida: " . $conn->connect_error);
         }
 
+        // Query segura
         $stmt = $conn->prepare("INSERT INTO mascota (nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro)
                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -146,9 +146,9 @@ class Empleado
             $idCentro
         );
 
-        // Ejecuta el query
+        // Ejecutar
         if ($stmt->execute()) {
-            header("Location: test.php"); 
+            header("Location: test.php"); //frontend/public/index.html
             exit;
         } else {
             echo "Error al insertar: " . $stmt->error;
