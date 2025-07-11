@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <img src="${imgSrc}" alt="${mascota.nombre}">
           <h3>${mascota.nombre}</h3>
           <p class="meta">${mascota.edad} semanas &nbsp; ${mascota.especie}</p>
-          <button class="btn edit">Editar</button>
+          <a href="formulario-editar.html" class="btn edit">Editar</a>
           <button class="btn delete">Eliminar</button>
         `;
 
