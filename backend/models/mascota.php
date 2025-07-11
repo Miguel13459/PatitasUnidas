@@ -1,5 +1,5 @@
 <?php
-    class Mascota{
+    class Mascota implements JsonSerializable{
         private ?int $_idMascota;
         private string $_nombre;
         private string $_especie;
@@ -49,25 +49,19 @@
         public function setFotografia($fotografia) {$this->_fotografia = $fotografia;}
         public function setIdCentro($idCentro) {$this->_idCentro = $idCentro;}
 
-        public function mostrarMascota() {
-            require_once "../config/config.php";
-            $conn = new mysqli($servername, $username, $password, $dbname);
-
-            $stmt = $conn->prepare('SELECT * FROM mascota');
-            $stmt->execute();
-            $respuesta = $stmt->get_result();
-            $campos = $respuesta->fetch_assoc();
-
-            $this->_idMascota = $campos['idMascota'];
-            $this->_nombre = $campos['nombre'];
-            $this->_especie = $campos['especie'];
-            $this->_edad = $campos['edad'];
-            $this->_sexo = $campos['sexo'];
-            $this->_tamanio = $campos['tamanio'];
-            $this->_visibilidadSitio = $campos['visibilidadSitio'];
-            $this->_descripcion = $campos['descripcion'];
-            $this->_fotografia = $campos['fotografia'];
-            $this->_idCentro = $campos['idCentro'];
-        }
+        public function jsonSerialize(): array {
+        return [
+            'idMascota' => $this->_idMascota,
+            'nombre' => $this->_nombre,
+            'especie' => $this->_especie,
+            'edad' => $this->_edad,
+            'sexo' => $this->_sexo,
+            'tamanio' => $this->_tamanio,
+            'visibilidadSitio' => $this->_visibilidadSitio,
+            'descripcion' => $this->_descripcion,
+            'fotografia' => $this->_fotografia, // ya base64
+            'idCentro' => $this->_idCentro
+        ];
+    }
     }    
 ?>

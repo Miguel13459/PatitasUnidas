@@ -68,10 +68,12 @@ class Empleado
         }
 
         require_once 'autenticacionController.php';
-        $sesionEmpleado = new Autenticacion($empleado[1], $empleado[2]);
+        $sesionEmpleado = new Autenticacion($empleado['usuario'], $empleado['contrasenia']);
         $confirmarSesion = $sesionEmpleado->validarCredenciales();
 
         if ($confirmarSesion === true) {
+            $empleado['estadoInicioSesion'] = $confirmarSesion;
+
             //require_once "../config/config.php";
             $servername = "localhost";
             $username = "cuidadorAdmin";
@@ -79,12 +81,13 @@ class Empleado
             $dbname = "PatitasUnidas";
             $conn = new mysqli($servername, $username, $password, $dbname);
             $stmt = $conn->prepare("SELECT idPersonal FROM personal WHERE usuario = ?");
-            $stmt->bind_param("s", $empleado[1]);
+            $stmt->bind_param("s", $empleado['usuario']);
             $stmt->execute();
-            $empleado[0] = $stmt->get_result();
+            $empleado['idEmpleado'] = (int) $stmt->get_result();
             return $empleado;
         } else {
-            echo "Correo o contraseña incorrectos.";
+            $empleado['estadoInicioSesion'] = false;
+            return $empleado;
         }
     }
 

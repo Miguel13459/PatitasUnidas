@@ -9,114 +9,37 @@
 </head>
 <body>
   <!-- Encabezado -->
-     <div class="contenedor">
-  <header class="encabezado">
-    <a href="/PatitasUnidas/frontend/public/index.html">
-      <img src="../../frontend/src/assets/LogoPatiasUnidas.png" alt="Patitas Unidas" class="logo">
+  <div class="contenedor">
+    <header class="encabezado">
+      <a href="/PatitasUnidas/frontend/public/index.html">
+        <img src="../../frontend/src/assets/LogoPatiasUnidas.png" alt="Patitas Unidas" class="logo">
       </a>
-    <div class="admin-menu">
-      <button class="admin-btn">Administrador ▼</button>
-      <div class="admin-dropdown">
-        <button class="cerrar-sesion">Cerrar Sesión</button>
+      <div class="admin-menu">
+        <button class="admin-btn">Administrador ▼</button>
+        <div class="admin-dropdown">
+          <button class="cerrar-sesion">Cerrar Sesión</button>
+        </div>
       </div>
-    </div>
-    </div>
-  </header>
+    </header>
+  </div>
 
   <!-- Contenido principal -->
   <div class="contenedor">
     <main class="wrap">
-      
       <a href="Formulario-Editar.html" class="btn-add">Agregar animal</a>
-
-
-      <section class="card-grid">
-        <article class="card">
-          <img src="../../src/assets/perritoimg1.jpg" alt="Pasha">
-          <h3>Pasha</h3>
-          <p class="meta">9 semanas &nbsp; Tejonero</p>
-         <a href="formulario-editar.html" class="btn edit">Editar</a>
-
-          <button class="btn delete">Eliminar</button>
-        </article>
-
-        <article class="card">
-          <img src="../../src/assets/perritoimg2.jpg" alt="Joey">
-          <h3>Joey</h3>
-          <p class="meta">11 semanas &nbsp; Pomeranio</p>
-         <a href="formulario-editar.html" class="btn edit">Editar</a>
-
-          <button class="btn delete">Eliminar</button>
-        </article>
-
-        <article class="card">
-          <img src="../../src/assets/perritoimg3.jpg" alt="Maddox">
-          <h3>Maddox</h3>
-          <p class="meta">19 semanas &nbsp; Bichón Habanero</p>
-         <a href="formulario-editar.html" class="btn edit">Editar</a>
-
-          <button class="btn delete">Eliminar</button>
-        </article>
-
-        <article class="card">
-          <img src="../../src/assets/perritoimg4.jpg" alt="Lynfred">
-          <h3>Lynfred</h3>
-          <p class="meta">7 semanas &nbsp; Cavapoo</p>
-         <a href="formulario-editar.html" class="btn edit">Editar</a>
-
-          <button class="btn delete">Eliminar</button>
-        </article>
-
-        <article class="card">
-          <img src="../../src/assets/perritoimg5.jpg" alt="Abedul">
-          <h3>Abedul</h3>
-          <p class="meta">7 semanas &nbsp; Goldendoodle</p>
-          <a href="formulario-editar.html" class="btn edit">Editar</a>
-
-          <button class="btn delete">Eliminar</button>
-        </article>
-
-        <article class="card">
-          <img src="../../src/assets/perritoimg6.jpg" alt="Mikey">
-          <h3>Mikey</h3>
-          <p class="meta">18 semanas &nbsp; Cockapoo</p>
-          <a href="formulario-editar.html" class="btn edit">Editar</a>
-
-          <button class="btn delete">Eliminar</button>
-        </article>
-
-        <article class="card">
-          <img src="../../src/assets/perritoimg7.jpg" alt="Charlie">
-          <h3>Charlie</h3>
-          <p class="meta">14 semanas &nbsp; Labradoodle</p>
-        <a href="formulario-editar.html" class="btn edit">Editar</a>
-
-          <button class="btn delete">Eliminar</button>
-        </article>
-
-        <article class="card">
-          <img src="../../src/assets/perritoimg8.jpg" alt="Luna">
-          <h3>Luna</h3>
-          <p class="meta">12 semanas &nbsp; Golden Retriever</p>
-         <a href="formulario-editar.html" class="btn edit">Editar</a>
-
-          <button class="btn delete">Eliminar</button>
-        </article>
-
-        <article class="card">
-          <img src="../../src/assets/perritoimg9.jpg" alt="Mini">
-          <h3>Mini</h3>
-          <p class="meta">9 semanas &nbsp; Poodle</p>
-         <a href="formulario-editar.html" class="btn edit">Editar</a>
-
-          <button class="btn delete">Eliminar</button>
-        </article>
+      <section class="card-grid" id="contenedor-mascotas">
+        <!-- Aquí se insertarán las tarjetas dinámicamente -->
       </section>
     </main>
   </div>
-<div class="contenedor">
-    <div id="footer-placeholder"></div>
-<script src="/PatitasUnidas/frontend/src/components/footer.js"></script></div>
+
+  <div class="contenedor">
+      <div id="footer-placeholder"></div>
+  </div>
  
 </body>
+
+<script src="/PatitasUnidas/frontend/src/components/footer.js"></script>
+<script src="JS/mostrarMascotas.js"></script>
+
 </html>
