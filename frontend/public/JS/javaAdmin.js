@@ -1,4 +1,50 @@
+const form = document.querySelector('.login-form');
+const modal = document.getElementById('errorModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+
 document.addEventListener('DOMContentLoaded', function () {
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const username = form.querySelector('input[type="text"]').value.trim();
+    const password = form.querySelector('input[type="password"]').value.trim();
+
+    fetch('../../backend/controllers/api_login.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ usuario: username, contrasenia: password })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        console.log("Inicio de sesión exitoso ✅");
+        window.location.href = "/PatitasUnidas/frontend/src/pages/pruebaAdopcionAdmin.html";
+      } else {
+        mostrarModal(data.mensaje || "Inicio de sesión fallido");
+      }
+    })
+    .catch(err => {
+      console.error("Error en la petición:", err);
+      mostrarModal("Ocurrió un error inesperado.");
+    });
+  });
+
+  // Botón para cerrar el modal
+  closeModalBtn.addEventListener('click', function () {
+    modal.style.display = 'none';
+  });
+
+  // Función para mostrar el modal de error con mensaje personalizado
+  function mostrarModal(mensaje) {
+    modal.querySelector("p").textContent = mensaje;
+    modal.style.display = 'flex';
+  }
+});
+
+
+/*document.addEventListener('DOMContentLoaded', function () {
   console.log("✅ JS cargado correctamente");
 
   const form = document.querySelector('.login-form');
@@ -45,3 +91,4 @@ document.addEventListener('DOMContentLoaded', function () {
     modal.style.display = 'flex';
   }
 });
+*/

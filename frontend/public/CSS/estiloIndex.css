@@ -109,9 +109,15 @@ header a img {
   justify-content: center;
   margin-top: 20px;
 }
+
 a {
     color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
     text-decoration: none;
+}
+
+#enlaceDiscordia{
+  color: #fc5745;
+  text-decoration: none;
 }
 
 .nav-boton-adopcion button {
@@ -130,6 +136,10 @@ a {
   background-color: #fc5745;
   color: #ffffff;
   border-color: #fc5745;
+}
+
+#enlaceDiscordia:hover{
+  color: #ffffff;
 }
 
 /* --- Imagen y texto sobre nosotros --- */
