@@ -112,7 +112,9 @@ class Empleado
     //CREAR MASCOTA
     public function crearMascota(Mascota $mascota)
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         $visibilidadSitio = 1;
 
@@ -136,7 +138,11 @@ class Empleado
         $idCentro = $mascota->getIdCentro();
 
         // Conexión
-        require_once "..config/config.php";
+        //require_once "..config/config.php";
+        $servername = "localhost";
+        $username = "cuidadorAdmin";
+        $password = "citlalilandia";
+        $dbname = "PatitasUnidas";
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Conexión fallida: " . $conn->connect_error);
@@ -161,19 +167,22 @@ class Empleado
 
         // Ejecutar
         if ($stmt->execute()) {
-            header("Location: test.php"); //frontend/public/index.html
-            exit;
+            $stmt->close();
+            $conn->close();
+            return true;
         } else {
-            echo "Error al insertar: " . $stmt->error;
+            error_log("Error al insertar: " . $stmt->error);
+            $stmt->close();
+            $conn->close();
+            return false;
         }
-
-        $stmt->close();
-        $conn->close();
     }
 
     public function editarMascota()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         require_once "..config/config.php";
         $conn = new mysqli($servername, $username, $password, $dbname);
