@@ -109,8 +109,13 @@ header a img {
   justify-content: center;
   margin-top: 20px;
 }
+a {
+    color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+    text-decoration: none;
+}
 
 .nav-boton-adopcion button {
+   text-decoration: none;
   padding: 8px 14px;
   background-color: #ffffff;
   border: 2px solid #f3dbcf;

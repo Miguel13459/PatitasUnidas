@@ -1,4 +1,4 @@
-/*--- Contenedor general --- */
+/* --- Contenedor general --- */
 .contenedor {
   max-width: 1000px;
   margin: 0 auto;
@@ -23,6 +23,56 @@ header {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   margin-bottom: 20px;
 }
+
+
+.logo {
+  height: 50px;
+  justify-self: start;
+}
+
+header a img {
+  display: block;
+  cursor: pointer;
+}
+
+
+.nav-botones {
+  display: flex;
+  gap: 10px;
+  justify-self: end;
+}
+
+.nav-botones button {
+  padding: 8px 14px;
+  background-color: #ffffff;
+  border: 2px solid #f3dbcf;
+  border-radius: 8px;
+  color: #fc5745;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-botones button:hover {
+  background-color: #fc5745;
+  color: #ffffff;
+  border-color: #fc5745;
+}
+
+.invisible-clicable {
+  background-color: transparent !important;
+  color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  pointer-events: auto;
+  padding: 0 !important;
+  width: 100px; /* ajusta si quieres que tenga un tamaño específico */
+  height: 30px;
+  opacity: 0; /* oculta visualmente */
+}
+
+
 
 .logo {
   height: 50px;
@@ -98,9 +148,7 @@ img {
   justify-content: space-between;
 }
 
-.logo {
-  width: 180px;
-}
+
 
 /* Menú Admin con <details> */
 details {
@@ -244,7 +292,7 @@ footer {
 
 .footer-logo {
   width: 160px;
-  margin-inline: auto 8px;
+  margin-inline: auto;
 }
 
 .footer-heading {

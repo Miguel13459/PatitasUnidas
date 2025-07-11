@@ -1,0 +1,189 @@
+
+
+/* --- Contenedor general --- */
+.contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* --- Estilos generales --- */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* --- Header con Grid --- */
+header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+
+.logo {
+  height: 50px;
+  justify-self: start;
+}
+
+header a img {
+  display: block;
+  cursor: pointer;
+}* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Fredoka', sans-serif;
+}
+
+body {
+  background-color: #fff;
+  color: #333;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  height: 60px;
+}
+
+.admin-dropdown {
+  position: relative;
+}
+
+.admin-btn {
+  background: #fff0ec;
+  border: 1px solid #ff5f4d;
+  color: #ff5f4d;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff0ec;
+  border: 1px solid #ff5f4d;
+  right: 0;
+  top: 35px;
+  z-index: 1;
+}
+
+.admin-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  color: #ff5f4d;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.form-container {
+  background-color: #f6dbcf;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.upload-label {
+  display: block;
+  background-color: white;
+  color: #f55847;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 1rem;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.regresar {
+  background-color: #fff0ec;
+  color: #ff5f4d;
+  border: 2px solid #ff5f4d;
+}
+
+.btn.agregar {
+  background-color: #ff5f4d;
+  color: white;
+}
+
+footer {
+  background-color: #fce6dd;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+}
+
+.footer-logo {
+  height: 50px;
+}
+
+.direccion {
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+.social-icons {
+  margin-top: 10px;
+}
+
+.social-icons img {
+  height: 24px;
+  margin: 0 10px;
+}

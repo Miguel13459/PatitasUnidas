@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Editar Animal - Patitas Unidas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/EditarFormulario.css" />
+</head>
+<body>
+    <div class="contenedor">
+  <header>
+    <div class="top-bar">
+        <a href="/PatitasUnidas/frontend/public/index.html">
+      <img src="../../frontend/src/assets/LogoPatiasUnidas.png" alt="Patitas Unidas" class="logo">
+      </a>
+      <div class="admin-dropdown">
+        <button class="admin-btn">Administrador ▾</button>
+        <div class="dropdown-content">
+          <a href="#">Cerrar Sesión</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  </div>
+
+  <main>
+    <div class="form-container">
+      <form class="edit-form">
+        <label class="upload-label">
+          <input type="file" accept="image/*" hidden />
+          <span>⬆ Subir Imagen</span>
+        </label>
+
+        <div class="form-row">
+          <input type="text" placeholder="Nombre">
+          <select>
+            <option disabled selected>Especie</option>
+            <option>Perro</option>
+            <option>Gato</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <input type="text" placeholder="Edad">
+          <select>
+            <option disabled selected>Sexo</option>
+            <option>Macho</option>
+            <option>Hembra</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <input type="text" placeholder="Descripción">
+          <select>
+            <option disabled selected>Tamaño</option>
+            <option>Pequeño</option>
+            <option>Mediano</option>
+            <option>Grande</option>
+          </select>
+        </div>
+
+        <div class="form-buttons">
+          <button type="button" class="btn regresar">Regresar</button>
+          <button type="submit" class="btn agregar">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <div class="contenedor">
+    <div id="footer-placeholder"></div>
+<script src="/PatitasUnidas/frontend/src/components/footer.js"></script></div>
+</body>
+</html>
