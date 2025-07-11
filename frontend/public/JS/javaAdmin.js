@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const username = form.querySelector('input[type="text"]').value.trim();
     const password = form.querySelector('input[type="password"]').value.trim();
 
-    fetch('../../backend/controllers/api_login.php', {
+    fetch('/PatitasUnidas/backend/controllers/api_login.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(data => {
       if (data.success) {
         console.log("Inicio de sesión exitoso ✅");
-        window.location.href = "/PatitasUnidas/frontend/src/pages/pruebaAdopcionAdmin.html";
+        window.location.href = "/PatitasUnidas/frontend/public/adopcion.html";
       } else {
         mostrarModal(data.mensaje || "Inicio de sesión fallido");
       }

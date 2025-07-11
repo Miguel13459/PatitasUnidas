@@ -1,5 +1,5 @@
 <?php
-    function inicioDeSesion(array $empleado){
+    /*function inicioDeSesion(array $empleado){
         $inicioDeSesionEmpleado = new Empleado(
             null,
             $_POST['usuario'],
@@ -13,5 +13,5 @@
         $empleado = $inicioDeSesionEmpleado->iniciarSesion($empleado);
 
         return $empleado;
-    }
+    }*/
 ?>

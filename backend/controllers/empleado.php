@@ -80,10 +80,20 @@ class Empleado
             $password = "citlalilandia";
             $dbname = "PatitasUnidas";
             $conn = new mysqli($servername, $username, $password, $dbname);
+
+            if ($conn->connect_error) {
+                die("Conexión fallida: " . $conn->connect_error);
+            }
+
             $stmt = $conn->prepare("SELECT idPersonal FROM personal WHERE usuario = ?");
             $stmt->bind_param("s", $empleado['usuario']);
             $stmt->execute();
-            $empleado['idEmpleado'] = (int) $stmt->get_result();
+            $result = $stmt->get_result();
+            $fila = $result->fetch_assoc();
+
+            $empleado['idEmpleado'] = $fila ? (int) $fila['idPersonal'] : null;
+
+            $_SESSION['usuario'] = $empleado['usuario'];
             return $empleado;
         } else {
             $empleado['estadoInicioSesion'] = false;

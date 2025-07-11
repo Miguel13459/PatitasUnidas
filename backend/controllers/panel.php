@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $empleado = array(
+    /*$empleado = array(
         'idEmpleado' => null,
 	    'usuario' => '',
 	    'contrasenia' => '',
@@ -8,12 +8,6 @@
         'estadoInicioSesion' => false
         );
     $idCentro;
-
-    // Archivos necesarios
-    /*require_once '../models/mascota.php';
-    require_once '../autenticacionController.php';
-    require_once 'mascotaController.php';
-    require_once 'empleado.php';*/
 
     // INICIO DE SESIÓN
     if (isset($_REQUEST['iniciarSesion'])) {
@@ -33,7 +27,7 @@
             sleep(1);
             header("Location: /PatitasUnidas/frontend/public/inicioSesion.html");
         }
-    }
+    }*/
 
     if(isset($_REQUEST['cerrarSesion'])){
         cerrarSesion($empleado);

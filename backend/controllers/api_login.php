@@ -1,19 +1,24 @@
 <?php
-// Configuración y clases
+// DEBUG - habilita errores
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once '../config/config.php';
 require_once 'empleado.php';
+require_once 'autenticacionController.php';
 
 header('Content-Type: application/json');
+session_start();
 
-// Leer cuerpo JSON crudo
+// 1. Recibir los datos en JSON desde JS
 $input = json_decode(file_get_contents('php://input'), true);
-
 $usuario = $input['usuario'] ?? '';
 $contrasenia = $input['contrasenia'] ?? '';
-$idSucursal = rand(1, 2);
+$idCentro = rand(1, 2);
 
-// Validar
-if (!$usuario || !$contrasenia) {
+// 2. Validación simple
+if (empty($usuario) || empty($contrasenia)) {
   echo json_encode([
     "success" => false,
     "mensaje" => "Usuario y contraseña requeridos."
@@ -21,10 +26,21 @@ if (!$usuario || !$contrasenia) {
   exit;
 }
 
-$empleado = new Empleado(null, $usuario, $contrasenia, $idSucursal);
-$resultado = $empleado->iniciarSesion([$empleado->getIdEmpleado(), $usuario, $contrasenia, $idSucursal]);
+// 3. Intentar autenticar
+$empleado = new Empleado(null, $usuario, $contrasenia, $idCentro);
+$datosEmpleado = [
+  'idEmpleado' => null,
+  'usuario' => $usuario,
+  'contrasenia' => $contrasenia,
+  'idCentro' => $idCentro,
+  'estadoInicioSesion' => false
+];
 
-if (isset($_SESSION['usuario'])) {
+// 4. Ejecutar inicio de sesión
+$datosEmpleado = $empleado->iniciarSesion($datosEmpleado);
+
+// 5. Retornar JSON como respuesta
+if ($datosEmpleado['estadoInicioSesion']) {
   echo json_encode(["success" => true]);
 } else {
   echo json_encode([
@@ -32,3 +48,4 @@ if (isset($_SESSION['usuario'])) {
     "mensaje" => "Usuario o contraseña incorrectos."
   ]);
 }
+?>
