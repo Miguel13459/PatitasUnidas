@@ -5,17 +5,23 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
 
     const formData = new FormData();
-
-    const inputs = form.querySelectorAll('input, select');
     const fileInput = form.querySelector('input[type="file"]');
 
-    formData.append('nombre', inputs[0].value);
-    formData.append('especie', inputs[1].value);
-    formData.append('edad', inputs[2].value);
-    formData.append('sexo', inputs[3].value);
-    formData.append('descripcion', inputs[4].value);
-    formData.append('tamanio', inputs[5].value);
-    formData.append('idCentro', 1); // O el ID que tengas
+    // Usamos `name` para asegurar orden correcto
+    const nombre = form.querySelector('input[name="nombre"]').value;
+    const especie = form.querySelector('select[name="especie"]').value;
+    const edad = form.querySelector('input[name="edad"]').value;
+    const sexo = form.querySelector('select[name="sexo"]').value;
+    const descripcion = form.querySelector('input[name="descripcion"]').value;
+    const tamanio = form.querySelector('select[name="tamanio"]').value;
+
+    formData.append('nombre', nombre);
+    formData.append('especie', especie);
+    formData.append('edad', edad);
+    formData.append('sexo', sexo);
+    formData.append('descripcion', descripcion);
+    formData.append('tamanio', tamanio);
+    formData.append('idCentro', 1); // O el ID correspondiente
     formData.append('fotografia', fileInput.files[0]);
 
     fetch('/PatitasUnidas/backend/controllers/acciones/crearMascota.php', {
