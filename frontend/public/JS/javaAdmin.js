@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(data => {
       if (data.success) {
         console.log("Inicio de sesión exitoso ✅");
-        window.location.href = "/PatitasUnidas/frontend/public/adopcion.html";
+        window.location.href = "/PatitasUnidas/frontend/public/adopcion.html"; //Inicio de sesión exitoso
       } else {
         mostrarModal(data.mensaje || "Inicio de sesión fallido");
       }

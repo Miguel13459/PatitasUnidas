@@ -24,9 +24,13 @@ if (
 if ($_FILES['fotografia']['error'] === UPLOAD_ERR_OK) {
     $imagenTmp = $_FILES['fotografia']['tmp_name'];
     $tamanioArchivo = $_FILES['fotografia']['size'];
-    $imagenSubida = fopen($imagenTmp, 'r');
+    $imagenSubida = fopen($imagenTmp, 'rb');
     $binariosImagen = fread($imagenSubida, $tamanioArchivo);
     fclose($imagenSubida);
+
+
+    //echo $imagenSubida;
+    //echo $binariosImagen;
 } else {
     echo json_encode([
         'success' => false,

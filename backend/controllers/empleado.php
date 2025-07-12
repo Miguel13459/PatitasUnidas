@@ -116,23 +116,12 @@ class Empleado
             session_start();
         }
 
-        //$visibilidadSitio = 1;
-
-        // Validar archivo subido
-        /*if (isset($_FILES['fotografia']) && $_FILES['fotografia']['error'] === UPLOAD_ERR_OK) {
-            $tamanioArchivo = $_FILES['fotografia']['size'];
-            $imagenSubida = fopen($_FILES['fotografia']['tmp_name'], 'r');
-            $binariosImagen = fread($imagenSubida, $tamanioArchivo);
-            fclose($imagenSubida);
-        } else {
-            die("Error al subir la imagen.");
-        }*/
-
         $nombre = $mascota->getNombre();
         $especie = $mascota->getEspecie();
         $edad = $mascota->getEdad();
         $sexo = $mascota->getSexo();
         $tamanio = $mascota->getTamanio();
+        $visibilidadSitio = $mascota->getVisibilidadSitio();
         $descripcion = $mascota->getDescripcion();
         $fotografia = $mascota->getFotografia();
         $idCentro = $mascota->getIdCentro();
@@ -152,6 +141,8 @@ class Empleado
         $stmt = $conn->prepare("INSERT INTO mascota (nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro)
                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
+        $fotoPlaceholder = null;
+
         $stmt->bind_param(
             "sssssisbi",
             $nombre,
@@ -161,9 +152,11 @@ class Empleado
             $tamanio,
             $visibilidadSitio,
             $descripcion,
-            $fotografia,
+            $fotoPlaceholder,
             $idCentro
         );
+        $stmt->send_long_data(7, $fotografia);
+
 
         // Ejecutar
         if ($stmt->execute()) {
