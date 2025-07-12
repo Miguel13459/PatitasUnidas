@@ -8,7 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const card = document.createElement("article");
         card.classList.add("card");
 
-        const imgSrc = `data:image/jpeg;base64,${mascota.fotografia}`;
+        let imgSrc;
+        if (mascota.fotografia && mascota.fotografia.length > 0) {
+          imgSrc = `data:image/jpeg;base64,${mascota.fotografia}`;
+        } else {
+          imgSrc = "/PatitasUnidas/frontend/src/assets/CabezaGatito.png";
+        }
 
         card.innerHTML = `
           <img src="${imgSrc}" alt="${mascota.nombre}">

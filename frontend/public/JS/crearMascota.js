@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -43,6 +43,15 @@ document.addEventListener('DOMContentLoaded', function () {
     formData.append('idCentro', 1); // O el ID correspondiente
     formData.append('fotografia', fileInput.files[0]);
 
+    console.log(nombre, especie, edad, sexo, descripcion, tamanio, fileInput.files[0]);
+    console.log("------------");
+    
+    console.log(formData.append('nombre', nombre));
+    console.log( formData.append('fotografia', fileInput.files[0]));
+
+    console.log("------------");
+    console.log(formData);
+
     fetch('/PatitasUnidas/backend/controllers/acciones/crearMascota.php', {
       method: 'POST',
       body: formData,
@@ -51,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         if (data.success) {
           alert('Mascota creada correctamente');
-          window.location.href = '/PatitasUnidas/frontend/public/adopcion.html';
+          //window.location.href = '/PatitasUnidas/frontend/public/adopcion.html';
         } else {
           alert('Error: ' + data.mensaje);
         }

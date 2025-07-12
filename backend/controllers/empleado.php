@@ -116,17 +116,17 @@ class Empleado
             session_start();
         }
 
-        $visibilidadSitio = 1;
+        //$visibilidadSitio = 1;
 
         // Validar archivo subido
-        if (isset($_FILES['fotografia']) && $_FILES['fotografia']['error'] === UPLOAD_ERR_OK) {
+        /*if (isset($_FILES['fotografia']) && $_FILES['fotografia']['error'] === UPLOAD_ERR_OK) {
             $tamanioArchivo = $_FILES['fotografia']['size'];
             $imagenSubida = fopen($_FILES['fotografia']['tmp_name'], 'r');
             $binariosImagen = fread($imagenSubida, $tamanioArchivo);
-            fclose($binariosImagen);
+            fclose($imagenSubida);
         } else {
             die("Error al subir la imagen.");
-        }
+        }*/
 
         $nombre = $mascota->getNombre();
         $especie = $mascota->getEspecie();
