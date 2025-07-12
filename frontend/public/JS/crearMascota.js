@@ -1,6 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('.edit-form');
+  const fileInput = form.querySelector('input[type="file"]');
+  const preview = document.getElementById('previewImagen');
 
+  // Mostrar vista previa al seleccionar imagen
+  fileInput.addEventListener('change', function () {
+    const file = fileInput.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = '';
+      preview.style.display = 'none';
+    }
+  });
+
+  
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 

@@ -184,3 +184,17 @@ footer {
   height: 24px;
   margin: 0 10px;
 }
+
+/*IMAGEN PREVISUADA*/
+#contenedorImgPrev{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#contenedorImgPrev img{
+  max-width: 20%;
+  height: auto;
+  display: none; 
+  margin-bottom: 10px;
+}

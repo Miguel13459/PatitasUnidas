@@ -123,7 +123,7 @@ class Empleado
             $tamanioArchivo = $_FILES['fotografia']['size'];
             $imagenSubida = fopen($_FILES['fotografia']['tmp_name'], 'r');
             $binariosImagen = fread($imagenSubida, $tamanioArchivo);
-            fclose($imagenSubida);
+            fclose($binariosImagen);
         } else {
             die("Error al subir la imagen.");
         }
