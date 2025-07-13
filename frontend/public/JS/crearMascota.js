@@ -43,15 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
     formData.append('idCentro', 1); // O el ID correspondiente
     formData.append('fotografia', fileInput.files[0]);
 
-    console.log(nombre, especie, edad, sexo, descripcion, tamanio, fileInput.files[0]);
-    console.log("------------");
-    
-    console.log(formData.append('nombre', nombre));
-    console.log( formData.append('fotografia', fileInput.files[0]));
-
-    console.log("------------");
-    console.log(formData);
-
     fetch('/PatitasUnidas/backend/controllers/acciones/crearMascota.php', {
       method: 'POST',
       body: formData,

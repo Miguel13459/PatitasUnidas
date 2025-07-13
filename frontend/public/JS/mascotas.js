@@ -8,12 +8,21 @@ document.addEventListener("DOMContentLoaded", function () {
         const card = document.createElement("article");
         card.classList.add("card");
 
+        //console.log(response);
+        console.log(mascota);
         let imgSrc;
-        if (mascota.fotografia && mascota.fotografia.length > 0) {
-          imgSrc = `data:image/jpeg;base64,${mascota.fotografia}`;
-        } else {
+        try {
+          if (mascota.fotografia && mascota.fotografia.length > 100) {
+            imgSrc = `data:image/jpeg;base64,${mascota.fotografia}`;
+          } else {
+            throw new Error("Imagen vacía o inválida");
+          }
+        } catch (e) {
           imgSrc = "/PatitasUnidas/frontend/src/assets/CabezaGatito.png";
         }
+
+        console.log(imgSrc);
+        //console.log("Imagen base64 (truncada):", mascota.fotografia.substring(0, 100));
 
         card.innerHTML = `
           <img src="${imgSrc}" alt="${mascota.nombre}">

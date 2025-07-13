@@ -12,13 +12,14 @@
                 die("Conexión fallida: " . $conn->connect_error);
             }
 
-            $stmt = $conn->prepare('SELECT * FROM mascota');
+            $stmt = $conn->prepare('SELECT * FROM mascota ORDER BY idMascota DESC');
             $stmt->execute();
             $respuesta = $stmt->get_result();
 
             $grupoDeMascotas = [];
 
             while ($campos = $respuesta->fetch_assoc()) {
+                //$fotografia = base64_encode($campos['fotografia']);
                 $mascota = new Mascota(
                     $campos['idMascota'],
                     $campos['nombre'],

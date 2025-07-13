@@ -23,20 +23,17 @@ if (
 // Procesar imagen
 if ($_FILES['fotografia']['error'] === UPLOAD_ERR_OK) {
     $imagenTmp = $_FILES['fotografia']['tmp_name'];
+    $imgTipo = $_FILES['fotografia']['type'];
+    $imgPermitidas = array("image/png", "image/jpeg", "image/webp");
+    if (!in_array($imgTipo, $imgPermitidas)) {
+        errorTipoImg();
+    }
     $tamanioArchivo = $_FILES['fotografia']['size'];
     $imagenSubida = fopen($imagenTmp, 'rb');
     $binariosImagen = fread($imagenSubida, $tamanioArchivo);
     fclose($imagenSubida);
-
-
-    //echo $imagenSubida;
-    //echo $binariosImagen;
 } else {
-    echo json_encode([
-        'success' => false,
-        'mensaje' => 'Error al subir la imagen.'
-    ]);
-    exit;
+    errorImagenSubida();
 }
 
 $visibilidadSitio = 1;
@@ -69,6 +66,22 @@ if ($exito === true) {
         'success' => false,
         'mensaje' => 'Error al crear mascota.'
     ]);
+}
+
+function errorTipoImg(){
+    echo json_encode([
+            'success' => false,
+            'mensaje' => 'Error: no puedes subir ese tipo de archivo.'
+        ]);
+        exit;
+}
+
+function errorImagenSubida(){
+    echo json_encode([
+        'success' => false,
+        'mensaje' => 'Error al subir la imagen.'
+    ]);
+    exit;
 }
 
 ?>

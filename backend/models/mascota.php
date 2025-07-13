@@ -35,7 +35,7 @@
         public function getTamanio() {return $this->_tamanio;}
         public function getVisibilidadSitio() {return $this->_visibilidadSitio;}
         public function getDescripcion() {return $this->_descripcion;}
-        public function getFotografia() { return base64_encode($this->_fotografia);}
+        public function getFotografia() { return $this->_fotografia ? base64_encode($this->_fotografia) : null;}
         public function getIdCentro() {return $this->_idCentro;}
 
         public function setId($idMascota) {$this->_idMascota = $idMascota;}
@@ -59,7 +59,7 @@
             'tamanio' => $this->_tamanio,
             'visibilidadSitio' => $this->_visibilidadSitio,
             'descripcion' => $this->_descripcion,
-            'fotografia' => base64_encode($this->_fotografia),
+            'fotografia' => $this->getFotografia(),
             'idCentro' => $this->_idCentro
         ];
     }
