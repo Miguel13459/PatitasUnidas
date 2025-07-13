@@ -171,25 +171,49 @@ class Empleado
         }
     }
 
-    public function editarMascota()
+    public function editarMascota(Mascota $mascota)
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        require_once "..config/config.php";
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        $idMascota = $mascota->getId();
+        $nombre = $mascota->getNombre();
+        $especie = $mascota->getEspecie();
+        $edad = $mascota->getEdad();
+        $sexo = $mascota->getSexo();
+        $tamanio = $mascota->getTamanio();
+        $descripcion = $mascota->getDescripcion();
+        $fotografia = $mascota->getFotografia();
+        $idCentro = $mascota->getIdCentro();
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $stmt = $conn->prepare("UPDATE mascota SET nombre = ?, especie= ?, edad= ?, sexo= ?, tamanio= ?, visibilidadSitio= ?, descripcion= ?, fotografia= ?, idCentro= ? WHERE id=?");
-            $stmt->bind_param("sissi", $_POST['nombre'], $_POST['edad'], $_POST['descripcion'], $_POST['imagen_url'], $_POST['id']);
-            $stmt->execute();
-            header("Location: adopciones.php");
-            exit;
+        require "..config/config.php";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Conexión fallida: " . $conn->connect_error);
         }
 
-        $id = $_GET['id'];
-        $animal = $conn->query("SELECT * FROM animales WHERE id=$id")->fetch_assoc();
+        if ($fotografia) {
+            $stmt = $conn->prepare("UPDATE mascota SET nombre = ?, especie= ?, edad= ?, sexo= ?, tamanio= ?, descripcion= ?, fotografia= ?, idCentro= ? WHERE id=?");
+            $stmt->bind_param("ssssssbii", $nombre, $especie, $edad, $sexo, $tamanio, $descripcion, $fotoPlaceholder, $idCentro, $idMascota);
+            $stmt->send_long_data(6, $fotografia);
+        } else {
+            $stmt = $conn->prepare("UPDATE mascota SET nombre = ?, especie= ?, edad= ?, sexo= ?, tamanio= ?, descripcion= ?, idCentro= ? WHERE id=?");
+            $stmt->bind_param("ssssssiii", $nombre, $especie, $edad, $sexo, $tamanio, $descripcion, $idCentro, $idMascota);
+        }
+
+
+        // Ejecutar
+        if ($stmt->execute()) {
+            $stmt->close();
+            $conn->close();
+            return true;
+        } else {
+            error_log("Error al insertar: " . $stmt->error);
+            $stmt->close();
+            $conn->close();
+            return false;
+        }
     }
 
     public function eliminarMascota() {}

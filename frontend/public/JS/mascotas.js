@@ -8,8 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const card = document.createElement("article");
         card.classList.add("card");
 
-        //console.log(response);
-        console.log(mascota);
         let imgSrc;
         try {
           if (mascota.fotografia && mascota.fotografia.length > 100) {
@@ -21,16 +19,19 @@ document.addEventListener("DOMContentLoaded", function () {
           imgSrc = "/PatitasUnidas/frontend/src/assets/CabezaGatito.png";
         }
 
-        console.log(imgSrc);
-        //console.log("Imagen base64 (truncada):", mascota.fotografia.substring(0, 100));
-
         card.innerHTML = `
           <img src="${imgSrc}" alt="${mascota.nombre}">
           <h3>${mascota.nombre}</h3>
           <p class="meta">${mascota.edad} semanas &nbsp; ${mascota.especie}</p>
-          <a href="formulario-editar.html" class="btn edit">Editar</a>
+          <button class="btn edit">Editar</button>
           <button class="btn delete">Eliminar</button>
         `;
+
+        //Evento para editar
+        card.querySelector('.edit').addEventListener('click', () => {
+          localStorage.setItem('mascotaEditar', JSON.stringify(mascota));
+          window.location.href = '/PatitasUnidas/frontend/public/Formulario-Editar.html';
+        });
 
         contenedor.appendChild(card);
       });
