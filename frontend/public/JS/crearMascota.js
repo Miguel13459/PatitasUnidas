@@ -1,4 +1,4 @@
-/*document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('#formulario-mascota');
   const fileInput = form.querySelector('input[type="file"]');
   const preview = document.getElementById('previewImagen');
@@ -61,7 +61,7 @@
         alert('Error inesperado.');
       });
   });
-});*/
+});
 
 /*document.getElementById('formulario-mascota').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -106,7 +106,7 @@
   });*/
 
 
-document.addEventListener('DOMContentLoaded', function () {
+/*document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('#formulario-mascota');
   const fileInput = form.querySelector('input[type="file"]');
   const preview = document.getElementById('previewImagen');
@@ -187,13 +187,6 @@ document.addEventListener('DOMContentLoaded', function () {
       ? '/PatitasUnidas/backend/controllers/acciones/editarMascota.php'
       : '/PatitasUnidas/backend/controllers/acciones/crearMascota.php';
 
-    /*let url;
-    if(modo === 'editar'){
-      url = '/PatitasUnidas/backend/controllers/acciones/editarMascota.php'
-    }else{
-      url = '/PatitasUnidas/backend/controllers/acciones/crearMascota.php'
-    }
-    console.log(localStorage);*/
     fetch(url, {
       method: 'POST',
       body: formData
@@ -213,4 +206,4 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Error inesperado.');
       });
   });
-});
+});*/

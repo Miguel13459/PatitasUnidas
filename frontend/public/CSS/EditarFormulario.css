@@ -198,3 +198,8 @@ footer {
   display: none; 
   margin-bottom: 10px;
 }
+
+#titulo{
+  width: 100%;
+  text-align: center;
+}
