@@ -9,8 +9,8 @@ require_once '../empleado.php';
 
 if (
     empty($_POST['idMascota']) || empty($_POST['nombre']) || empty($_POST['especie']) || empty($_POST['edad']) ||
-    empty($_POST['sexo']) || empty($_POST['tamanio']) || empty($_POST['descripcion']) || empty($_POST['idCentro'] || 
-    !isset($_FILES['fotografia']))
+    empty($_POST['sexo']) || empty($_POST['tamanio']) || empty($_POST['descripcion']) || empty($_POST['idCentro'] ||
+        !isset($_FILES['fotografia']))
 ) {
     echo json_encode([
         'success' => false,
@@ -48,5 +48,3 @@ echo json_encode([
     'success' => $exito,
     'mensaje' => $exito ? 'Mascota editada correctamente.' : 'Error al editar mascota.'
 ]);
-
-?>

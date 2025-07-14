@@ -13,10 +13,7 @@
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
-            $servername = "localhost";
-            $username = "cuidadorAdmin";
-            $password = "citlalilandia";
-            $dbname = "PatitasUnidas";
+            require_once(__DIR__ . '/../config/config.php');
             $conn = new mysqli($servername, $username, $password, $dbname);
             if ($conn->connect_error) {
                 die("Conexión fallida: " . $conn->connect_error); //CAMBIAR RESPUESTA DE CONECCION FALLIDA, SALDRÁ UN MENSAJE O LO REDIRIGE?

@@ -61,7 +61,20 @@
             'descripcion' => $this->_descripcion,
             'fotografia' => $this->_fotografia,
             'idCentro' => $this->_idCentro
-        ];
-    }
+        ];}
+
+        /*public function obtenerPorId(int $idMascota){
+            $servername = "localhost";
+            $username = "cuidadorAdmin";
+            $password = "citlalilandia";
+            $dbname = "PatitasUnidas";
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            $stmt = $conn->prepare('SELECT * FROM mascota WHERE idMascota = ?');
+            $stmt->execute();
+            $respuesta = $stmt->get_result();
+
+            return $respuesta;
+        }*/
     }    
 ?>

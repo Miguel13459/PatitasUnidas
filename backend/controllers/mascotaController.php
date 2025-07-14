@@ -1,11 +1,9 @@
 <?php
+
     class MascotaController{
         public function mostrarMascota() {
             #require_once "/PatitasUnidas/backend/config/config.php";
-            $servername = "localhost";
-            $username = "cuidadorAdmin";
-            $password = "citlalilandia";
-            $dbname = "PatitasUnidas";
+            require_once(__DIR__ . '/../config/config.php');
             $conn = new mysqli($servername, $username, $password, $dbname);
 
             if ($conn->connect_error) {
@@ -40,6 +38,38 @@
             $conn->close();
 
             return $grupoDeMascotas;
+        }
+
+        public static function obtenerPorId(int $idMascota){
+
+            
+            $servername = "localhost";
+            $username = "cuidadorAdmin";
+            $password = "citlalilandia";
+            $dbname = "PatitasUnidas";
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            $stmt = $conn->prepare('SELECT * FROM mascota WHERE idMascota = ?');
+            $stmt->bind_param("i", $idMascota);
+            $stmt->execute();
+            $respuesta = $stmt->get_result();
+
+            $campo = $respuesta->fetch_assoc();
+            require_once(__DIR__ . '/../models/mascota.php');
+            $mascota = new Mascota(
+                $campo['idMascota'],
+                $campo['nombre'],
+                $campo['especie'],
+                $campo['edad'],
+                $campo['sexo'],
+                $campo['tamanio'],
+                $campo['visibilidadSitio'],
+                $campo['descripcion'],
+                $campo['fotografia'],
+                $campo['idCentro']
+            );
+
+            return $mascota;
         }
     }
 ?>

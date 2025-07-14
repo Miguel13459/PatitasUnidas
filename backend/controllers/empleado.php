@@ -48,10 +48,7 @@ class Empleado
             $empleado['estadoInicioSesion'] = $confirmarSesion;
 
             //require_once "../config/config.php";
-            $servername = "localhost";
-            $username = "cuidadorAdmin";
-            $password = "citlalilandia";
-            $dbname = "PatitasUnidas";
+            require_once(__DIR__ . '/../config/config.php');
             $conn = new mysqli($servername, $username, $password, $dbname);
 
             if ($conn->connect_error) {
@@ -101,10 +98,7 @@ class Empleado
 
         // Conexión
         //require_once "..config/config.php";
-        $servername = "localhost";
-        $username = "cuidadorAdmin";
-        $password = "citlalilandia";
-        $dbname = "PatitasUnidas";
+        require_once(__DIR__ . '/../config/config.php');
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Conexión fallida: " . $conn->connect_error);
@@ -165,10 +159,7 @@ class Empleado
         $idCentro = 1;
 
         //require "..config/config.php";
-        $servername = "localhost";
-        $username = "cuidadorAdmin";
-        $password = "citlalilandia";
-        $dbname = "PatitasUnidas";
+        require_once(__DIR__ . '/../config/config.php');
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Conexión fallida: " . $conn->connect_error);
@@ -200,10 +191,7 @@ class Empleado
         $idMascota = $mascota->getId();
         $visibilidadSitio = 0;
 
-        $servername = "localhost";
-        $username = "cuidadorAdmin";
-        $password = "citlalilandia";
-        $dbname = "PatitasUnidas";
+        require_once(__DIR__ . '/../config/config.php');
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Conexión fallida: " . $conn->connect_error);
