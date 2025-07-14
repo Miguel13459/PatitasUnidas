@@ -110,7 +110,7 @@ class Empleado
     }
 
     //CREAR MASCOTA
-    public function crearMascota(Mascota $mascota)
+    public function crearMascota(Mascota $mascota) : bool
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -124,7 +124,7 @@ class Empleado
         $visibilidadSitio = $mascota->getVisibilidadSitio();
         $descripcion = $mascota->getDescripcion();
         $fotografia = $mascota->getFotografia();
-        $idCentro = $mascota->getIdCentro();
+        $idCentro = 1;
 
         // Conexión
         //require_once "..config/config.php";
@@ -141,7 +141,7 @@ class Empleado
         $stmt = $conn->prepare("INSERT INTO mascota (nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro)
                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        $fotoPlaceholder = null;
+        //$fotoPlaceholder = null;
 
         $stmt->bind_param(
             "sssssisbi",
@@ -157,9 +157,13 @@ class Empleado
         );
         $stmt->send_long_data(7, $fotografia);
 
+        $succes = $stmt->execute();
+        $stmt->close();
+        $conn->close();
+        return $succes;
 
         // Ejecutar
-        if ($stmt->execute()) {
+        /*if ($stmt->execute()) {
             $stmt->close();
             $conn->close();
             return true;
@@ -168,7 +172,7 @@ class Empleado
             $stmt->close();
             $conn->close();
             return false;
-        }
+        }*/
     }
 
     public function editarMascota(Mascota $mascota)

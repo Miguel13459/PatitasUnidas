@@ -26,14 +26,14 @@
 
   <main>
     <div class="form-container">
-      <form class="edit-form">
+      <form id="formulario-mascota" enctype="multipart/form-data" class="edit-form">
         <!-- Vista previa de la imagen -->
         <div id="contenedorImgPrev">
           <img id="previewImagen" src="" alt="Vista previa de la imagen"/>
         </div>
         
         <label class="upload-label">
-          <input type="file" accept="image/*" hidden />
+          <input type="file" name="fotografia" accept="image/jpeg, image/png" hidden />
           <span>⬆ Subir Imagen</span>
         </label>
 
@@ -41,8 +41,8 @@
           <input type="text" name="nombre" placeholder="Nombre">
           <select name="especie">
             <option disabled selected>Especie</option>
-            <option>Perro</option>
-            <option>Gato</option>
+            <option value="perro">Perro</option>
+            <option value="gato">Gato</option>
           </select>
         </div>
 
@@ -50,8 +50,8 @@
           <input type="text" name="edad" placeholder="Edad">
           <select name="sexo">
             <option disabled selected>Sexo</option>
-            <option>Macho</option>
-            <option>Hembra</option>
+            <option value="macho">Macho</option>
+            <option value="hembra">Hembra</option>
           </select>
         </div>
 
@@ -59,14 +59,14 @@
           <input type="text" name="descripcion" placeholder="Descripción">
           <select name="tamanio">
             <option disabled selected>Tamaño</option>
-            <option>Pequeño</option>
-            <option>Mediano</option>
-            <option>Grande</option>
+            <option value="pequenio">Pequeño</option>
+            <option value="mediano">Mediano</option>
+            <option value="grande">Grande</option>
           </select>
         </div>
 
         <div class="form-buttons">
-          <button type="button" class="btn regresar">Regresar</button>
+          <button type="button" id="regresar" class="btn regresar">Regresar</button>
           <button type="submit" class="btn agregar">Guardar</button>
         </div>
       </form>

@@ -1,17 +1,16 @@
 <?php
-header('Content-Type: application/json');
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+header('Content-Type: application/json');
 
 require_once '../../models/mascota.php';
 require_once '../empleado.php';
 
 // Validar campos
 if (
-    empty($_POST['nombre']) || empty($_POST['especie']) || empty($_POST['edad']) ||
-    empty($_POST['sexo']) || empty($_POST['tamanio']) || empty($_POST['descripcion']) ||
-    empty($_POST['idCentro']) || !isset($_FILES['fotografia'])
+    !isset($_POST['nombre'],$_POST['especie'], $_POST['edad'], $_POST['sexo'],
+    $_POST['tamanio'], $_POST['descripcion'],$_POST['idCentro'],$_FILES['fotografia'])
 ) {
     echo json_encode([
         'success' => false,
@@ -20,8 +19,20 @@ if (
     exit;
 }
 
+//validar imagen
+$imgPermitidas = array("image/png", "image/jpeg");
+if (!in_array($_FILES['fotografia']['type'], $imgPermitidas)) {
+    echo json_encode([
+        'success' => false,
+        'mensaje' => 'Faltan campos requeridos.'
+    ]);
+    exit;
+}
+
+$imagenTmp = $_FILES['fotografia']['tmp_name'];
+$imagenBinario = file_get_contents($imagenTmp);
 // Procesar imagen
-if ($_FILES['fotografia']['error'] === UPLOAD_ERR_OK) {
+/*if ($_FILES['fotografia']['error'] === UPLOAD_ERR_OK) {
     $imagenTmp = $_FILES['fotografia']['tmp_name'];
     $imgTipo = $_FILES['fotografia']['type'];
     $imgPermitidas = array("image/png", "image/jpeg", "image/webp");
@@ -34,7 +45,7 @@ if ($_FILES['fotografia']['error'] === UPLOAD_ERR_OK) {
     fclose($imagenSubida);
 } else {
     errorImagenSubida();
-}
+}*/
 
 $visibilidadSitio = 1;
 
@@ -47,7 +58,7 @@ $mascota = new Mascota(
     $_POST['tamanio'],
     $visibilidadSitio,
     $_POST['descripcion'],
-    $binariosImagen,
+    $imagenBinario,
     (int)$_POST['idCentro']
 );
 
@@ -68,7 +79,7 @@ if ($exito === true) {
     ]);
 }
 
-function errorTipoImg(){
+/*function errorTipoImg(){
     echo json_encode([
             'success' => false,
             'mensaje' => 'Error: no puedes subir ese tipo de archivo.'
@@ -82,6 +93,6 @@ function errorImagenSubida(){
         'mensaje' => 'Error al subir la imagen.'
     ]);
     exit;
-}
+}*/
 
 ?>
