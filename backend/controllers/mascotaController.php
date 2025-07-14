@@ -12,7 +12,7 @@
                 die("Conexión fallida: " . $conn->connect_error);
             }
 
-            $stmt = $conn->prepare('SELECT * FROM mascota ORDER BY idMascota DESC');
+            $stmt = $conn->prepare('SELECT * FROM mascota WHERE visibilidadSitio = 1 ORDER BY idMascota DESC');
             $stmt->execute();
             $respuesta = $stmt->get_result();
 

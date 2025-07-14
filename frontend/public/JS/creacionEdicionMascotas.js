@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+/*document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('#formulario-mascota');
   const fileInput = form.querySelector('input[type="file"]');
   const preview = document.getElementById('previewImagen');
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Error inesperado.');
       });
   });
-});
+});*/
 
 /*document.getElementById('formulario-mascota').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -106,14 +106,16 @@ document.addEventListener('DOMContentLoaded', function () {
   });*/
 
 
-/*document.addEventListener('DOMContentLoaded', function () {
-  const form = document.querySelector('.edit-form');
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.querySelector('#formulario-mascota');
   const fileInput = form.querySelector('input[type="file"]');
   const preview = document.getElementById('previewImagen');
   const submitBtn = form.querySelector('.agregar');
 
   let modo = 'crear';
   let mascotaExistente = localStorage.getItem('mascotaEditar');
+
+  //console.log(mascotaExistente);
 
   if (mascotaExistente) {
     mascotaExistente = JSON.parse(mascotaExistente);
@@ -205,4 +207,3 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 });
-*/

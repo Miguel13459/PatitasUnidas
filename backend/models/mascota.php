@@ -13,7 +13,7 @@
 
         public function __construct(
             ?int $idMascota, string $nombre, string $especie, string $edad, string $sexo, string $tamanio,
-            bool $visibilidadSitio, string $descripcion, string $fotografia, int $idCentro
+            bool $visibilidadSitio, string $descripcion, ?string $fotografia, int $idCentro
         ) {
             $this->_idMascota = $idMascota;
             $this->_nombre = $nombre;

@@ -1,10 +1,4 @@
 <?php
-/*require_once '../config/config.php';
-    require_once 'autenticacionController.php';
-    require_once '../models/centroAdoptivo.php';
-    require_once '../models/eventos.php';
-    require_once '../models/mascota.php';*/
-
 class Empleado
 {
     public ?int $_idEmpleado;
@@ -29,35 +23,14 @@ class Empleado
             return $this->_idEmpleado;
         }
     }
-    public function getUsuario()
-    {
-        return $this->_usuario;
-    }
-    public function getContrasenia()
-    {
-        return $this->_contrasenia;
-    }
-    public function getCentro()
-    {
-        return $this->_centro;
-    }
+    public function getUsuario(){return $this->_usuario;}
+    public function getContrasenia(){return $this->_contrasenia;}
+    public function getCentro(){return $this->_centro;}
 
-    public function setIdEmpleado($idEmpleado)
-    {
-        $this->_idEmpleado = $idEmpleado;
-    }
-    public function setUsuario($usuario)
-    {
-        $this->_usuario = $usuario;
-    }
-    public function setContrasenia($contrasenia)
-    {
-        $this->_contrasenia = $contrasenia;
-    }
-    public function setCentro($centro)
-    {
-        $this->_centro = $centro;
-    }
+    public function setIdEmpleado($idEmpleado){$this->_idEmpleado = $idEmpleado;}
+    public function setUsuario($usuario){$this->_usuario = $usuario;}
+    public function setContrasenia($contrasenia){$this->_contrasenia = $contrasenia;}
+    public function setCentro($centro){$this->_centro = $centro;}
 
 
     //INICIO DE SESION
@@ -189,14 +162,20 @@ class Empleado
         $tamanio = $mascota->getTamanio();
         $descripcion = $mascota->getDescripcion();
         $fotografia = $mascota->getFotografia();
-        $idCentro = $mascota->getIdCentro();
+        $idCentro = 1;
 
-        require "..config/config.php";
+        //require "..config/config.php";
+        $servername = "localhost";
+        $username = "cuidadorAdmin";
+        $password = "citlalilandia";
+        $dbname = "PatitasUnidas";
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Conexión fallida: " . $conn->connect_error);
         }
 
+        $fotoPlaceholder = null;
+        
         if ($fotografia) {
             $stmt = $conn->prepare("UPDATE mascota SET nombre = ?, especie= ?, edad= ?, sexo= ?, tamanio= ?, descripcion= ?, fotografia= ?, idCentro= ? WHERE id=?");
             $stmt->bind_param("ssssssbii", $nombre, $especie, $edad, $sexo, $tamanio, $descripcion, $fotoPlaceholder, $idCentro, $idMascota);
@@ -207,20 +186,40 @@ class Empleado
         }
 
 
-        // Ejecutar
-        if ($stmt->execute()) {
-            $stmt->close();
-            $conn->close();
-            return true;
-        } else {
-            error_log("Error al insertar: " . $stmt->error);
-            $stmt->close();
-            $conn->close();
-            return false;
-        }
+        $succes = $stmt->execute();
+        $stmt->close();
+        $conn->close();
+        return $succes;
     }
 
-    public function eliminarMascota() {}
+    public function eliminarMascota(Mascota $mascota) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-    public function registrarEvento() {}
+        $idMascota = $mascota->getId();
+        $visibilidadSitio = 0;
+
+        $servername = "localhost";
+        $username = "cuidadorAdmin";
+        $password = "citlalilandia";
+        $dbname = "PatitasUnidas";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Conexión fallida: " . $conn->connect_error);
+        }
+
+        $stmt = $conn->prepare("UPDATE mascota SET visibilidadSitio = ? WHERE id=?");
+        $stmt->bind_param("ii", $visibilidadSitio, $idMascota);
+
+        $succes = $stmt->execute();
+        $stmt->close();
+        $conn->close();
+        return $succes;
+
+    }
+
+    public function registrarEvento(Evento $evento) {
+        
+    }
 }
