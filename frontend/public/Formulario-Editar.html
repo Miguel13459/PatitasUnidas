@@ -33,13 +33,13 @@
         </div>
         
         <label class="upload-label">
-          <input type="file" name="fotografia" accept="image/jpeg, image/png" hidden />
+          <input type="file" name="fotografia" id="fotografia" accept="image/jpeg, image/png" hidden />
           <span>⬆ Subir Imagen</span>
         </label>
 
         <div class="form-row">
-          <input type="text" name="nombre" placeholder="Nombre">
-          <select name="especie">
+          <input type="text" name="nombre" id="nombre" placeholder="Nombre">
+          <select name="especie" id="especie">
             <option disabled selected>Especie</option>
             <option value="perro">Perro</option>
             <option value="gato">Gato</option>
@@ -47,8 +47,8 @@
         </div>
 
         <div class="form-row">
-          <input type="text" name="edad" placeholder="Edad">
-          <select name="sexo">
+          <input type="text"  name="edad" id="edad" placeholder="Edad">
+          <select name="sexo" id="sexo">
             <option disabled selected>Sexo</option>
             <option value="macho">Macho</option>
             <option value="hembra">Hembra</option>
@@ -57,7 +57,7 @@
 
         <div class="form-row">
           <input type="text" name="descripcion" placeholder="Descripción">
-          <select name="tamanio">
+          <select name="tamanio" id="tamanio">
             <option disabled selected>Tamaño</option>
             <option value="pequenio">Pequeño</option>
             <option value="mediano">Mediano</option>
@@ -79,5 +79,4 @@
 
 </body>
 <script src="JS/creacionEdicionMascotas.js"></script>
-<script src="JS/formulario-mascota.js"></script>
 </html>

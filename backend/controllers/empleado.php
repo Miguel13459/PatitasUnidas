@@ -141,7 +141,7 @@ class Empleado
         $stmt = $conn->prepare("INSERT INTO mascota (nombre, especie, edad, sexo, tamanio, visibilidadSitio, descripcion, fotografia, idCentro)
                                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        //$fotoPlaceholder = null;
+        $fotoPlaceholder = null;
 
         $stmt->bind_param(
             "sssssisbi",
