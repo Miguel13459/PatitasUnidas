@@ -8,7 +8,7 @@
         private string $_tamanio;
         private bool $_visibilidadSitio;
         private string $_descripcion;
-        private string $_fotografia;
+        private ?string $_fotografia;
         private int $_idCentro;
 
         public function __construct(

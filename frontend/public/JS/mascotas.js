@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
         card.innerHTML = `
           <img src="${imgSrc}" alt="${mascota.nombre}">
           <h3>${mascota.nombre}</h3>
-          <p class="meta">${mascota.edad} semanas &nbsp; ${mascota.especie}</p>
-          <button class="btn edit">Editar</button>
-          <button class="btn delete">Eliminar</button>
+          <p class="meta">${mascota.edad} &nbsp; ${mascota.especie}</p>
+          <button id="editar" class="btn edit">Editar</button>
+          <button id="eliminar" class="btn delete">Eliminar</button>
         `;
 
         //Evento para editar

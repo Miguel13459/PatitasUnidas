@@ -176,13 +176,13 @@ class Empleado
 
         $fotoPlaceholder = null;
         
-        if ($fotografia) {
-            $stmt = $conn->prepare("UPDATE mascota SET nombre = ?, especie= ?, edad= ?, sexo= ?, tamanio= ?, descripcion= ?, fotografia= ?, idCentro= ? WHERE id=?");
+        if ($fotografia != null) {
+            $stmt = $conn->prepare("UPDATE mascota SET nombre = ?, especie= ?, edad= ?, sexo= ?, tamanio= ?, descripcion= ?, fotografia= ?, idCentro= ? WHERE idMascota=?");
             $stmt->bind_param("ssssssbii", $nombre, $especie, $edad, $sexo, $tamanio, $descripcion, $fotoPlaceholder, $idCentro, $idMascota);
             $stmt->send_long_data(6, $fotografia);
         } else {
-            $stmt = $conn->prepare("UPDATE mascota SET nombre = ?, especie= ?, edad= ?, sexo= ?, tamanio= ?, descripcion= ?, idCentro= ? WHERE id=?");
-            $stmt->bind_param("ssssssiii", $nombre, $especie, $edad, $sexo, $tamanio, $descripcion, $idCentro, $idMascota);
+            $stmt = $conn->prepare("UPDATE mascota SET nombre = ?, especie= ?, edad= ?, sexo= ?, tamanio= ?, descripcion= ?, idCentro= ? WHERE idMascota=?");
+            $stmt->bind_param("ssssssii", $nombre, $especie, $edad, $sexo, $tamanio, $descripcion, $idCentro, $idMascota);
         }
 
 

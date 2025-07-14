@@ -187,6 +187,13 @@ document.addEventListener('DOMContentLoaded', function () {
       ? '/PatitasUnidas/backend/controllers/acciones/editarMascota.php'
       : '/PatitasUnidas/backend/controllers/acciones/crearMascota.php';
 
+    /*let url;
+    if(modo === 'editar'){
+      url = '/PatitasUnidas/backend/controllers/acciones/editarMascota.php'
+    }else{
+      url = '/PatitasUnidas/backend/controllers/acciones/crearMascota.php'
+    }
+    console.log(localStorage);*/
     fetch(url, {
       method: 'POST',
       body: formData
