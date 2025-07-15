@@ -23,19 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Rellenar campos
       form.nombre.value = mascota.nombre;
-      form.especie.value = mascota.especie;
+      form.especie.value = mascota.especie.toLowerCase();
       form.edad.value = mascota.edad;
-      form.sexo.value = mascota.sexo;
+      form.sexo.value = mascota.sexo.toLowerCase();
       form.descripcion.value = mascota.descripcion;
-      form.tamanio.value = mascota.tamanio;
+      form.tamanio.value = mascota.tamanio.toLowerCase();
 
-      if (mascota.fotografia) {
+    if (mascota.fotografia && mascota.fotografia.length > 100) {
         preview.src = `data:image/jpeg;base64,${mascota.fotografia}`;
-        preview.style.display = 'block';
-      }else{
+    } else {
         preview.src = "/PatitasUnidas/frontend/src/assets/CabezaGatito.png";
-        preview.style.display = 'block';
-      }
+    }
+    preview.style.display = 'block';
+
 
       // Manejar envío
       form.addEventListener('submit', function (e) {

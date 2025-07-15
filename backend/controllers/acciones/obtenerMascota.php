@@ -15,9 +15,9 @@ if (!$mascota) {
     exit;
 }
 
-// Convertir imagen a base64 si existe
+// NO se debe convertir la imagen a base 64 eso ya sucede en el el frontend o debe suceder en el frontend
 $fotografia = $mascota->getFotografia();
-$base64Foto = $fotografia ? base64_encode($fotografia) : null;
+//$base64Foto = $fotografia ? base64_encode($fotografia) : null;
 
 echo json_encode([
     'success' => true,
@@ -29,7 +29,7 @@ echo json_encode([
         'sexo' => $mascota->getSexo(),
         'tamanio' => $mascota->getTamanio(),
         'descripcion' => $mascota->getDescripcion(),
-        'fotografia' => $base64Foto
+        'fotografia' => $fotografia
     ]
 ]);
 ?>

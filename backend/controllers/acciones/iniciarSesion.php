@@ -5,8 +5,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../config/config.php';
-require_once 'empleado.php';
-require_once 'autenticacionController.php';
+require_once '../empleado.php';
+require_once '../autenticacionController.php';
 
 header('Content-Type: application/json');
 session_start();

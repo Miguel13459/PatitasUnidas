@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const username = form.querySelector('input[type="text"]').value.trim();
     const password = form.querySelector('input[type="password"]').value.trim();
 
-    fetch('/PatitasUnidas/backend/controllers/iniciarSesion.php', {
+    fetch('/PatitasUnidas/backend/controllers/acciones/iniciarSesion.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
