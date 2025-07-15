@@ -33,6 +33,13 @@ if (!in_array($_FILES['fotografia']['type'], $imgPermitidas)) {
 $imagenTmp = $_FILES['fotografia']['tmp_name'];
 $imagenBinario = file_get_contents($imagenTmp);
 
+/*$imagenTmp = $_FILES['fotografia']['tmp_name'];
+$tamanioArchivo = $_FILES['fotografia']['size'];
+$imagenSubida = fopen($imagenTmp, 'rb');
+$binariosImagen = fread($imagenSubida, $tamanioArchivo);
+fclose($imagenSubida);
+$imagenBinario = file_get_contents($imagenTmp);*/
+
 
 $visibilidadSitio = 1;
 

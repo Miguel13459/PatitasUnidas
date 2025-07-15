@@ -21,7 +21,7 @@
             $grupoDeMascotas = [];
 
             while ($campos = $respuesta->fetch_assoc()) {
-                //$fotografia = base64_encode($campos['fotografia']);
+                $fotografia = base64_encode($campos['fotografia']);
                 $mascota = new Mascota(
                     $campos['idMascota'],
                     $campos['nombre'],
@@ -31,7 +31,8 @@
                     $campos['tamanio'],
                     $campos['visibilidadSitio'],
                     $campos['descripcion'],
-                    $campos['fotografia'],
+                    $fotografia,
+                    //$campos['fotografia'],
                     $campos['idCentro']
                 );
 
