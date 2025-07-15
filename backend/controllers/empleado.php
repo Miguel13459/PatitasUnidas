@@ -102,7 +102,11 @@ class Empleado
 
         // Conexión
         //require_once "..config/config.php";
-        require_once(__DIR__ . '/../config/config.php');
+        //require_once(__DIR__ . '/../config/config.php');
+        $servername = "localhost";
+        $username = "cuidadorAdmin";
+        $password = "citlalilandia";
+        $dbname = "PatitasUnidas";
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Conexión fallida: " . $conn->connect_error);

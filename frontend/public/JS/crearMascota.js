@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         if (data.success) {
           alert('Mascota creada correctamente');
-          window.location.href = '/PatitasUnidas/frontend/public/adopcion.html';
+          //window.location.href = '/PatitasUnidas/frontend/public/adopcion.html';
         } else {
           alert('Error: ' + data.mensaje);
         }
