@@ -191,12 +191,11 @@ class Empleado
         return $succes;
     }
 
-    public function eliminarMascota(Mascota $mascota) {
+    public function eliminarMascota(int $idMascota) {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        $idMascota = $mascota->getId();
         $visibilidadSitio = 0;
 
         require_once(__DIR__ . '/../config/config.php');
@@ -205,7 +204,7 @@ class Empleado
             die("Conexión fallida: " . $conn->connect_error);
         }
 
-        $stmt = $conn->prepare("UPDATE mascota SET visibilidadSitio = ? WHERE id=?");
+        $stmt = $conn->prepare("UPDATE mascota SET visibilidadSitio = ? WHERE idMascota = ?");
         $stmt->bind_param("ii", $visibilidadSitio, $idMascota);
 
         $succes = $stmt->execute();
