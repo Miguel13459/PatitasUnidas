@@ -1,0 +1,104 @@
+/* 🐾 Modal contenedor */
+#modalMascota {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro detrás */
+}
+
+/* 🐶 Contenedor interno (la tarjeta) */
+#modalMascota .modal-content {
+  background-color: #fff4ef;
+  border-radius: 25px;
+  margin: 5% auto;
+  padding: 25px;
+  width: 90%;
+  max-width: 550px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 🪄 Animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ❌ Botón cerrar */
+#modalMascota .close, #modalMascota .cerrar {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  color: #e57373;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+#modalMascota .close:hover, #modalMascota .cerrar:hover {
+  color: #c62828;
+}
+
+/* 📸 Imagen de la mascota */
+#modalMascota .modal-content img,
+#modalFotoMascota {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin-bottom: 15px;
+}
+
+/* 🐾 Nombre de la mascota */
+#modalMascota .modal-content h2 {
+  margin: 15px 0 5px;
+  font-size: 26px;
+  color: #d84315;
+}
+
+/* 📋 Edad y Raza */
+#modalMascota .modal-content p#modalEdadRaza {
+  font-size: 16px;
+  color: #7b5e57;
+  margin-bottom: 15px;
+}
+
+/* 📝 Subtítulos (Detalles y Descripción) */
+#modalMascota .modal-content h3 {
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-size: 20px;
+  color: #ff7043;
+  border-bottom: 1px solid #ffcdd2;
+  padding-bottom: 3px;
+}
+
+/* 📖 Texto general */
+#modalMascota .modal-content p {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+}
+
+/* 📞 Teléfono */
+#modalMascota .modal-content .telefono {
+  font-size: 18px;
+  color: #f57c00;
+  margin-top: 10px;
+  font-weight: bold;
+}

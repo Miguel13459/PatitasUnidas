@@ -4,6 +4,18 @@ document.addEventListener('DOMContentLoaded', function () {
   const fileInput = form.querySelector('input[type="file"]');
   const preview = document.getElementById('previewImagen');
 
+  fileInput.addEventListener('change', function () {
+  const file = fileInput.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      preview.src = e.target.result; // Muestra la nueva imagen en el <img>
+    };
+    reader.readAsDataURL(file); // Lee la imagen como base64 para mostrarla
+  }
+});
+
+
   if (!id) {
     alert("No se proporcionó una mascota para editar");
     window.location.href = "adopcion.html";
@@ -42,7 +54,23 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         const formData = new FormData(form);
 
+        const nombre = form.nombre.value;
+        const especie = form.especie.value;
+        const edad = form.edad.value;
+        const sexo = form.sexo.value;
+        const descripcion = form.descripcion.value;
+        const tamanio = form.tamanio.value;
+
         formData.append('idMascota', id);
+        formData.append('nombre', nombre);
+        formData.append('especie', especie);
+        formData.append('edad', edad);
+        formData.append('sexo', sexo);
+        formData.append('descripcion', descripcion);
+        formData.append('tamanio', tamanio);
+        formData.append('idCentro', 1); 
+
+
         formData.append('idCentro', 1); // O el que corresponda
 
         const file = fileInput.files[0];

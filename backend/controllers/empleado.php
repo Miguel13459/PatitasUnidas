@@ -80,7 +80,7 @@ class Empleado
     {
         session_start();
         session_destroy();
-        header("Location: ../frontend/src/public/index.html");
+        //header("Location: ../frontend/src/public/index.html");
     }
 
     //CREAR MASCOTA

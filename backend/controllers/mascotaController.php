@@ -1,6 +1,8 @@
 <?php
 
     class MascotaController{
+        
+        
         public function mostrarMascota() {
             #require_once "/PatitasUnidas/backend/config/config.php";
             //require_once(__DIR__ . '/../config/config.php');
@@ -60,6 +62,7 @@
             $respuesta = $stmt->get_result();
 
             $campo = $respuesta->fetch_assoc();
+            $fotografia = base64_encode($campo['fotografia']);
             require_once(__DIR__ . '/../models/mascota.php');
             $mascota = new Mascota(
                 $campo['idMascota'],
@@ -70,7 +73,7 @@
                 $campo['tamanio'],
                 $campo['visibilidadSitio'],
                 $campo['descripcion'],
-                $campo['fotografia'],
+                $fotografia,
                 $campo['idCentro']
             );
 
