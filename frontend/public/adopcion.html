@@ -21,7 +21,8 @@
       </a>
       
       <!-- Menú hamburguesa Bootstrap -->
-      <div class="dropdown admin-menu">
+      <!-- MENÚ ADMINISTRADOR (visible solo si hay sesión) -->
+      <div class="dropdown admin-menu" id="adminMenu" style="display: none;">
         <button class="btn admin-visible-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           Administrador
         </button>
@@ -29,6 +30,12 @@
           <li><button class="dropdown-item cerrar-sesion" type="button">Cerrar Sesión</button></li>
         </ul>
       </div>
+
+      <!-- BOTÓN DE INICIO DE SESIÓN (visible si NO hay sesión) -->
+      <div id="loginButton" style="display: none;">
+        <a href="/PatitasUnidas/frontend/public/InicioSesion.html" class="btn admin-visible-btn">Iniciar sesión</a>
+      </div>
+
     </header>
   </div>
 
@@ -75,5 +82,6 @@
 <script src="JS/mascotas.js"></script>
 <script src="JS/modalMascota.js"></script>
 <script src="JS/cerrarSesion.js"></script>
+<script src="JS/verificarSesionUI.js"></script>
 </body>
 </html>

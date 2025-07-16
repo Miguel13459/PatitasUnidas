@@ -14,22 +14,29 @@ if (!isset($_SESSION['usuario'])) {
   <title>Editar Animal - Patitas Unidas</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="CSS/EditarFormulario.css" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/estiloAdopcion.css">
 </head>
 <body>
-    <div class="contenedor">
-  <header>
-    <div class="top-bar">
-        <a href="/PatitasUnidas/frontend/public/index.html">
-      <img src="../../frontend/src/assets/LogoPatiasUnidas.png" alt="Patitas Unidas" class="logo">
+  <!-- Encabezado -->
+  <div class="contenedor">
+    <header class="encabezado d-flex justify-content-between align-items-center">
+      <a href="/PatitasUnidas/frontend/public/index.html">
+        <img src="../../frontend/src/assets/LogoPatiasUnidas.png" alt="Patitas Unidas" class="logo">
       </a>
-      <div class="admin-dropdown">
-        <button class="admin-btn">Administrador ▾</button>
-        <div class="dropdown-content">
-          <a href="#">Cerrar Sesión</a>
-        </div>
+      
+      <!-- Menú hamburguesa Bootstrap -->
+      <div class="dropdown admin-menu">
+        <button class="btn admin-visible-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          Administrador
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><button class="dropdown-item cerrar-sesion" type="button">Cerrar Sesión</button></li>
+        </ul>
       </div>
-    </div>
-  </header>
+    </header>
   </div>
 
   <main>
@@ -88,4 +95,5 @@ if (!isset($_SESSION['usuario'])) {
 
 </body>
 <script src="JS/editarMascota.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>
