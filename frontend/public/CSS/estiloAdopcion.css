@@ -116,6 +116,7 @@ header a img {
 .card {
   text-align: center;
   font-family: 'Fredoka', sans-serif;
+  padding-bottom: 10px;
 }
 
 .card img {
@@ -149,6 +150,8 @@ header a img {
   font-weight: 600;
   cursor: pointer;
   transition: opacity .2s;
+  background-color: #fc5745;
+  color: white;
 }
 
 /* Espacio entre Editar y Eliminar */
@@ -241,3 +244,4 @@ footer {
     text-align: left;
   }
 }
+
