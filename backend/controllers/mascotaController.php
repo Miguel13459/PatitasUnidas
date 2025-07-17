@@ -48,8 +48,6 @@
         }
 
         public static function obtenerPorId(int $idMascota){
-
-            
             $servername = "localhost";
             $username = "cuidadorAdmin";
             $password = "citlalilandia";
@@ -78,6 +76,20 @@
             );
 
             return $mascota;
+        }
+
+        public static function obtenerUltimaMascota(){
+            $servername = "localhost";
+            $username = "cuidadorAdmin";
+            $password = "citlalilandia";
+            $dbname = "PatitasUnidas";
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            $stmt = $conn->prepare('SELECT idMascota FROM mascota ORDER BY idMascota DESC LIMIT 1');
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            $fila = $resultado->fetch_assoc();
+            return $fila ? (int) $fila['idMascota'] : null;
         }
     }
 ?>

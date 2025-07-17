@@ -3,10 +3,10 @@ class Empleado
 {
     public ?int $_idEmpleado;
     private string $_usuario;
-    private string $_contrasenia;
+    private ?string $_contrasenia;
     private int $_centro;
 
-    public function __construct(?int $idEmpleado, string $usuario, string $contrasenia, int $centro)
+    public function __construct(?int $idEmpleado, string $usuario, ?string $contrasenia, int $centro)
     {
         $this->_idEmpleado = $idEmpleado;
         $this->_usuario = $usuario;
@@ -215,6 +215,59 @@ class Empleado
     }
 
     public function registrarEvento(Evento $evento) {
-        
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $tipoEvento = $evento->getEvento();
+        $fechaEvento = $evento->getFechaEvento();
+        $idMascota = $evento->getIdMascota();
+        $idEmpleado = $evento->getIdEmpleado();
+        $idCentro = $evento->getIdCentro();
+
+        // Conexión
+        //require_once "..config/config.php";
+        //require_once(__DIR__ . '/../config/config.php');
+        $servername = "localhost";
+        $username = "cuidadorAdmin";
+        $password = "citlalilandia";
+        $dbname = "PatitasUnidas";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Conexión fallida: " . $conn->connect_error);
+        }
+
+        // Query segura
+        $stmt = $conn->prepare("INSERT INTO manipulacioninfo (tipoEvento, fechaEvento, idMascota, idCentro, idPersonal)
+                                        VALUES (?, ?, ?, ?, ?)");
+
+        $stmt->bind_param(
+            "ssiii",
+            $tipoEvento,
+            $fechaEvento,
+            $idMascota,
+            $idCentro,
+            $idEmpleado
+        );
+
+        $succes = $stmt->execute();
+        $stmt->close();
+        $conn->close();
+        return $succes;
+    }
+
+    public static function obtenerIdEmpleado(string $usuario){
+        $servername = "localhost";
+            $username = "cuidadorAdmin";
+            $password = "citlalilandia";
+            $dbname = "PatitasUnidas";
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            $stmt = $conn->prepare('SELECT idPersonal FROM personal WHERE usuario = ?');
+            $stmt->bind_param("s", $usuario);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            $fila = $resultado->fetch_assoc();
+            return $fila ? (int) $fila['idPersonal'] : null;
     }
 }

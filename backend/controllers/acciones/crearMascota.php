@@ -1,11 +1,10 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 header('Content-Type: application/json');
 
 require_once '../../models/mascota.php';
 require_once '../empleado.php';
+require_once '../../models/eventos.php';
+require_once '../mascotaController.php';
 
 // Validar campos
 if (
@@ -56,12 +55,25 @@ $mascota = new Mascota(
     (int)$_POST['idCentro']
 );
 
-// Guardar en DB
-$empleado = new Empleado(null, '', '', $_POST['idCentro']);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+//Obtenemos el usuario y el id del empleado, se ocupan para registrar el evento
+$usuario = $_SESSION['usuario'] ?? null;
+$idEmpleado = Empleado::obtenerIdEmpleado($usuario);
+
+// Se guarda en la base de datos
+$empleado = new Empleado($idEmpleado, $usuario, null, $_POST['idCentro']);
 $exito = $empleado->crearMascota($mascota);
 
-// Respuesta JSON
-if ($exito === true) {
+//se registra en la tabla manipulacionInfo para mantener registro de quien y donde se hizo
+$idMascota = MascotaController::obtenerUltimaMascota();
+$evento = new Evento(null, "Creación de mascota", date("Y-m-d H:i:s"), $idMascota, (int)$_POST['idCentro'], $idEmpleado);
+$empleado->registrarEvento($evento);
+
+// Se envia la respuesta al frontend
+if (!($exito === true && $empleado === true)) {
     echo json_encode([
         'success' => true,
         'mensaje' => 'Mascota creada correctamente.'
