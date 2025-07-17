@@ -19,14 +19,14 @@ document.addEventListener('DOMContentLoaded', function () {
       modal.style.display = 'none';
       redirigir = true;
       if (redirigir) {
-        window.location.href = 'adopcion.html';
+        window.location.href = '/PatitasUnidas/public/adopcion.html';
       }
     };
   }
 
   // Botón regresar
   btnRegresar.addEventListener('click', () => {
-    window.location.href = 'adopcion.html';
+    window.location.href = '/PatitasUnidas/public/adopcion.html';
   });
 
   // Vista previa al seleccionar imagen

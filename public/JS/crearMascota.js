@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const modalMensaje = document.getElementById('modalMensaje');
   const mensajeTexto = document.getElementById('mensajeTexto');
   const btnCerrarMensaje = document.getElementById('btnCerrarMensaje');
+  const btnRegresar = document.getElementById('regresar');
+
+  // Botón regresar
+  btnRegresar.addEventListener('click', () => {
+    window.location.href = '/PatitasUnidas/public/adopcion.html';
+  });
 
   // Mostrar vista previa al seleccionar imagen
   fileInput.addEventListener('change', function () {
