@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🔥 Función para abrir modal y cargar datos
   function abrirModal(idMascota) {
-    fetch(`/PatitasUnidas/backend/controllers/acciones/obtenerMascota.php?id=${idMascota}`)
+    fetch(`/PatitasUnidas/app/controllers/acciones/obtenerMascota.php?id=${idMascota}`)
       .then(response => response.json())
       .then(data => {
         if (!data.success) {
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('modalSexoMascota').textContent = mascota.sexo;
         document.getElementById('modalDescripcionMascota').textContent = mascota.descripcion;
 
-        let imgSrc = "/PatitasUnidas/frontend/src/assets/CabezaGatito.png";
+        let imgSrc = "/PatitasUnidas/src/assets/CabezaGatito.png";
         if (mascota.fotografia && mascota.fotografia.length > 100) {
           imgSrc = `data:image/jpeg;base64,${mascota.fotografia}`;
         }

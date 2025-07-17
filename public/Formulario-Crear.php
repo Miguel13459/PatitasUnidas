@@ -23,7 +23,7 @@ if (!isset($_SESSION['usuario'])) {
   <!-- Encabezado -->
   <div class="contenedor">
     <header class="encabezado d-flex justify-content-between align-items-center">
-      <a href="/PatitasUnidas/public/index.html">
+      <a href="/PatitasUnidas/index.html">
         <img src="/PatitasUnidas/src/assets/LogoPatiasUnidas.png" alt="Patitas Unidas" class="logo">
       </a>
       

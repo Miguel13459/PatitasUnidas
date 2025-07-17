@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("/PatitasUnidas/backend/controllers/acciones/verificarSesion.php")
+  fetch("/PatitasUnidas/app/controllers/acciones/verificarSesion.php")
     .then(res => res.json())
     .then(data => {
       const adminMenu = document.getElementById("adminMenu");

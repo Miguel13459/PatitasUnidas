@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /PatitasUnidas/frontend/public/index.html");
+    header("Location: /PatitasUnidas/public/index.html");
     exit;
 }
 ?>
@@ -23,8 +23,8 @@ if (!isset($_SESSION['usuario'])) {
   <!-- Encabezado -->
   <div class="contenedor">
     <header class="encabezado d-flex justify-content-between align-items-center">
-      <a href="/PatitasUnidas/frontend/public/index.html">
-        <img src="../../frontend/src/assets/LogoPatiasUnidas.png" alt="Patitas Unidas" class="logo">
+      <a href="/PatitasUnidas/index.html">
+        <img src="/PatitasUnidas/src/assets/LogoPatiasUnidas.png" alt="Patitas Unidas" class="logo">
       </a>
       
       <!-- Menú hamburguesa Bootstrap -->
@@ -100,7 +100,7 @@ if (!isset($_SESSION['usuario'])) {
 
   <div class="contenedor">
   <div id="footer-placeholder"></div>
-  <script src="/PatitasUnidas/frontend/src/components/footer.js"></script></div>
+  <script src="/PatitasUnidas/src/components/footer.js"></script></div>
 
 </body>
 <script src="JS/editarMascota.js"></script>

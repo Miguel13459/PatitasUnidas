@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (mascota.fotografia && mascota.fotografia.length > 100) {
         preview.src = `data:image/jpeg;base64,${mascota.fotografia}`;
       } else {
-        preview.src = "/PatitasUnidas/frontend/src/assets/CabezaGatito.png";
+        preview.src = "/PatitasUnidas/src/assets/CabezaGatito.png";
       }
       preview.style.display = 'block';
 

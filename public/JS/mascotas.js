@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /*const urlParams = new URLSearchParams(window.location.search);
   const modoPublico = urlParams.get('modo') === 'publico';*/
 
-  fetch("/PatitasUnidas/backend/controllers/acciones/verificarSesion.php")
+  fetch("/PatitasUnidas/app/controllers/acciones/verificarSesion.php")
     .then(res => res.json())
     .then(data => {
       const esAdmin = data.autenticado;
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
 
-      fetch("/PatitasUnidas/backend/controllers/acciones/mostrarMascota.php") //realiza una petición a esta direccion del servidor
+      fetch("/PatitasUnidas/app/controllers/acciones/mostrarMascota.php") //realiza una petición a esta direccion del servidor
         .then(response => response.json()) //guarda la respuesta
         .then(mascotas => {
           mascotas.forEach(mascota => { //recorre la respuesta con un for each, es decir, todos los objetos del archivo json
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             card.classList.add("card");
 
             //Valida la imagen si no hay nada en la base de datos pone la que hay en la dirección por defecto
-            let imgSrc = "/PatitasUnidas/frontend/src/assets/CabezaGatito.png";
+            let imgSrc = "/PatitasUnidas/src/assets/CabezaGatito.png";
             if (mascota.fotografia && mascota.fotografia.length > 100) {
               imgSrc = `data:image/jpeg;base64,${mascota.fotografia}`;
             }

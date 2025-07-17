@@ -1,6 +1,6 @@
 document.getElementById("footer-placeholder").innerHTML = `
   <footer class="footer">
-    <img src="/PatitasUnidas/frontend/src/assets/LogoPatiasUnidas.png" alt="Patitas Unidas" class="footer-logo">
+    <img src="/PatitasUnidas/src/assets/LogoPatiasUnidas.png" alt="Patitas Unidas" class="footer-logo">
     <p class="footer-subtitulo">Dirección</p>
     <p class="footer-direccion">
       Calle Esperanza #214,<br>

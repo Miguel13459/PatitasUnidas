@@ -4,7 +4,7 @@
         
         
         public function mostrarMascota() {
-            #require_once "/PatitasUnidas/backend/config/config.php";
+            #require_once "/PatitasUnidas/app/config/config.php";
             //require_once(__DIR__ . '/../config/config.php');
             $servername = "localhost";
             $username = "cuidadorAdmin";
