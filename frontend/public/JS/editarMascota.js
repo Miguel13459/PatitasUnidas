@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   if (!id) {
-    alert("No se proporcionó una mascota para editar");
+    mostrarModalMensaje("No se proporcionó una mascota para editar");
     window.location.href = "adopcion.html";
     return;
   }
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(res => res.json())
     .then(data => {
       if (!data.success) {
-        alert("No se pudo cargar la mascota.");
+        mostrarModalMensaje("No se pudo cargar la mascota.");
         return;
       }
 
@@ -85,10 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-            alert('Mascota editada correctamente');
+            mostrarModalMensaje('Mascota editada correctamente');
             window.location.href = 'adopcion.html';
           } else {
-            alert('Error: ' + data.mensaje);
+            mostrarModalMensaje('Error: ' + data.mensaje);
           }
         })
         .catch(err => {

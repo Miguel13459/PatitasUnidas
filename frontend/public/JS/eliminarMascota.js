@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const contenedor = document.getElementById("contenedor-mascotas");
   const modalConfirmacion = document.getElementById("modalConfirmacion");
+  const modalMensaje = document.getElementById("modalMensaje");
+  const mensajeTexto = document.getElementById("mensajeTexto");
+  const btnCerrarMensaje = document.getElementById("btnCerrarMensaje");
   const btnCancelar = document.getElementById("btnCancelarEliminar");
   const btnConfirmar = document.getElementById("btnConfirmarEliminar");
   let idMascotaSeleccionada = null;
@@ -15,6 +18,24 @@ document.addEventListener("DOMContentLoaded", () => {
   function cerrarModalConfirmacion() {
     modalConfirmacion.style.display = "none";
     idMascotaSeleccionada = null;
+  }
+
+  // Mostrar modal de mensaje
+  function mostrarModalMensaje(texto, recargar = false) {
+    mensajeTexto.textContent = texto;
+    modalMensaje.style.display = "flex";
+
+    btnCerrarMensaje.onclick = () => {
+      modalMensaje.style.display = "none";
+      if (recargar) location.reload();
+    };
+
+    window.onclick = (e) => {
+      if (e.target === modalMensaje) {
+        modalMensaje.style.display = "none";
+        if (recargar) location.reload();
+      }
+    };
   }
 
   // Escuchar clic en botón "Cancelar" del modal
@@ -35,15 +56,14 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => res.json())
       .then(data => {
         if (data.message.includes("correctamente")) {
-          alert("Mascota eliminada correctamente.");
-          location.reload();
+          mostrarModalMensaje(data.message, true);
         } else {
-          alert("No se pudo eliminar la mascota.");
+          mostrarModalMensaje(data.message);
         }
       })
       .catch(err => {
         console.error("Error al eliminar mascota:", err);
-        alert("Error inesperado al eliminar la mascota.");
+        mostrarModalMensaje("Error inesperado al eliminar la mascota.");
       })
       .finally(() => cerrarModalConfirmacion());
   });

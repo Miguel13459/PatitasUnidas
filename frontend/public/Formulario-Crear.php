@@ -89,6 +89,15 @@ if (!isset($_SESSION['usuario'])) {
     </div>
   </main>
 
+  <!-- Modal de mensaje (éxito o error) -->
+<div id="modalMensaje" class="modal">
+  <div class="modal-content">
+    <p id="mensajeTexto"></p>
+    <button id="btnCerrarMensaje">Aceptar</button>
+  </div>
+</div>
+
+
   <div class="contenedor">
     <div id="footer-placeholder"></div>
 <script src="/PatitasUnidas/frontend/src/components/footer.js"></script></div>

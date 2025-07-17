@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('#formulario-mascota');
   const fileInput = form.querySelector('input[type="file"]');
   const preview = document.getElementById('previewImagen');
+  const modalMensaje = document.getElementById('modalMensaje');
+  const mensajeTexto = document.getElementById('mensajeTexto');
+  const btnCerrarMensaje = document.getElementById('btnCerrarMensaje');
 
   // Mostrar vista previa al seleccionar imagen
   fileInput.addEventListener('change', function () {
@@ -19,14 +22,39 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // Mostrar modal de mensaje (éxito o error)
+  function mostrarModalMensaje(texto, recargar = false, redirect = null) {
+    mensajeTexto.textContent = texto;
+    modalMensaje.style.display = 'flex';
 
+    btnCerrarMensaje.onclick = () => {
+      modalMensaje.style.display = 'none';
+      if (redirect) {
+        window.location.href = redirect;
+      } else if (recargar) {
+        location.reload();
+      }
+    };
+
+    window.onclick = (e) => {
+      if (e.target === modalMensaje) {
+        modalMensaje.style.display = 'none';
+        if (redirect) {
+          window.location.href = redirect;
+        } else if (recargar) {
+          location.reload();
+        }
+      }
+    };
+  }
+
+  // Manejar envío del formulario
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
     const formData = new FormData();
     const fileInput = form.querySelector('input[type="file"]');
 
-    // Usamos name para asegurar orden correcto
     const nombre = form.querySelector('input[name="nombre"]').value;
     const especie = form.querySelector('select[name="especie"]').value;
     const edad = form.querySelector('input[name="edad"]').value;
@@ -40,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
     formData.append('sexo', sexo);
     formData.append('descripcion', descripcion);
     formData.append('tamanio', tamanio);
-    formData.append('idCentro', 1); //cambiar el id
+    formData.append('idCentro', 1); //cambiar el id según sea necesario
     formData.append('fotografia', fileInput.files[0]);
 
     fetch('/PatitasUnidas/backend/controllers/acciones/crearMascota.php', {
@@ -50,16 +78,14 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          alert('Mascota creada correctamente');
-          //window.location.href = '/PatitasUnidas/frontend/public/adopcion.html';
-          window.location.href = 'adopcion.html';
+          mostrarModalMensaje('Mascota creada correctamente', false, 'adopcion.html');
         } else {
-          alert('Error: ' + data.mensaje);
+          mostrarModalMensaje('Error: ' + data.mensaje);
         }
       })
       .catch(err => {
         console.error('Error al crear mascota:', err);
-        alert('Error inesperado.');
+        mostrarModalMensaje('Error inesperado.');
       });
   });
 });
