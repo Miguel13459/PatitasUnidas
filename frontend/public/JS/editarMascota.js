@@ -5,6 +5,25 @@ document.addEventListener('DOMContentLoaded', function () {
   const preview = document.getElementById('previewImagen');
   const btnRegresar = document.getElementById('regresar');
 
+  //tomamos los botones de los modales
+  const modal = document.getElementById('modalMensaje');
+  const mensajeTexto = document.getElementById('mensajeTexto');
+  const closeModalBtn = document.getElementById('btnCerrarMensaje');
+
+  // Función para mostrar el modal con un mensaje
+  function mostrarModal(mensaje, redirigir = false) {
+    mensajeTexto.textContent = mensaje;
+    modal.style.display = 'flex';
+
+    closeModalBtn.onclick = () => {
+      modal.style.display = 'none';
+      redirigir = true;
+      if (redirigir) {
+        window.location.href = 'adopcion.html';
+      }
+    };
+  }
+
   // Botón regresar
   btnRegresar.addEventListener('click', () => {
     window.location.href = 'adopcion.html';
@@ -88,10 +107,9 @@ document.addEventListener('DOMContentLoaded', function () {
           .then(res => res.json())
           .then(data => {
             if (data.success) {
-              mostrarModalMensaje('Mascota editada correctamente');
-              window.location.href = 'adopcion.html';
+              mostrarModal('Mascota editada correctamente');
             } else {
-              mostrarModalMensaje('Error: ' + data.mensaje);
+              mostrarModal('Error: ' + data.mensaje);
             }
           })
           .catch(err => {

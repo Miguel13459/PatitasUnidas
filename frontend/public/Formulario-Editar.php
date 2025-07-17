@@ -89,8 +89,8 @@ if (!isset($_SESSION['usuario'])) {
     </div>
   </main>
 
-  <!-- Modal de mensaje (éxito o error) -->
-<div id="modalMensaje" class="modal">
+<!-- Modal de mensaje (éxito o error) -->
+<div id="modalMensaje" class="modal" style="display: none;">
   <div class="modal-content">
     <p id="mensajeTexto"></p>
     <button id="btnCerrarMensaje">Aceptar</button>
