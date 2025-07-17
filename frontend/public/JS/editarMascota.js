@@ -3,18 +3,25 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('formulario-mascota');
   const fileInput = form.querySelector('input[type="file"]');
   const preview = document.getElementById('previewImagen');
+  const btnRegresar = document.getElementById('regresar');
 
+  // Botón regresar
+  btnRegresar.addEventListener('click', () => {
+    window.location.href = 'adopcion.html';
+  });
+
+  // Vista previa al seleccionar imagen
   fileInput.addEventListener('change', function () {
-  const file = fileInput.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      preview.src = e.target.result; // Muestra la nueva imagen en el <img>
-    };
-    reader.readAsDataURL(file); // Lee la imagen como base64 para mostrarla
-  }
-});
-
+    const file = fileInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result; // Muestra la nueva imagen en el <img>
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(file); // Lee la imagen como base64 para mostrarla
+    }
+  });
 
   if (!id) {
     mostrarModalMensaje("No se proporcionó una mascota para editar");
@@ -41,13 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
       form.descripcion.value = mascota.descripcion;
       form.tamanio.value = mascota.tamanio.toLowerCase();
 
-    if (mascota.fotografia && mascota.fotografia.length > 100) {
+      if (mascota.fotografia && mascota.fotografia.length > 100) {
         preview.src = `data:image/jpeg;base64,${mascota.fotografia}`;
-    } else {
+      } else {
         preview.src = "/PatitasUnidas/frontend/src/assets/CabezaGatito.png";
-    }
-    preview.style.display = 'block';
-
+      }
+      preview.style.display = 'block';
 
       // Manejar envío
       form.addEventListener('submit', function (e) {
@@ -68,9 +74,6 @@ document.addEventListener('DOMContentLoaded', function () {
         formData.append('sexo', sexo);
         formData.append('descripcion', descripcion);
         formData.append('tamanio', tamanio);
-        formData.append('idCentro', 1); 
-
-
         formData.append('idCentro', 1); // O el que corresponda
 
         const file = fileInput.files[0];
@@ -82,18 +85,18 @@ document.addEventListener('DOMContentLoaded', function () {
           method: 'POST',
           body: formData
         })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            mostrarModalMensaje('Mascota editada correctamente');
-            window.location.href = 'adopcion.html';
-          } else {
-            mostrarModalMensaje('Error: ' + data.mensaje);
-          }
-        })
-        .catch(err => {
-          console.error("Error al editar mascota:", err);
-        });
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              mostrarModalMensaje('Mascota editada correctamente');
+              window.location.href = 'adopcion.html';
+            } else {
+              mostrarModalMensaje('Error: ' + data.mensaje);
+            }
+          })
+          .catch(err => {
+            console.error("Error al editar mascota:", err);
+          });
       });
     })
     .catch(err => {
