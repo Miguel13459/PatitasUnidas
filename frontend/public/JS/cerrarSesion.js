@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-            alert(data.mensaje || "Sesión cerrada.");
             window.location.href = "/PatitasUnidas/frontend/public/index.html";
           } else {
             alert("No se pudo cerrar sesión.");
